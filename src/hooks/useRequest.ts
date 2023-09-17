@@ -1,5 +1,5 @@
-import { useCallback, useState } from "react";
-import useMount from "./useMount";
+import { useCallback, useState } from 'react';
+import useMount from './useMount';
 
 interface IUseRequest {
   params: Record<string, string>;
@@ -21,26 +21,24 @@ interface IUseRequest {
 */
 const useRequest = (
   service: (params: Record<string, string>) => Promise<unknown>,
-  options: IUseRequest
+  options: IUseRequest,
 ) => {
   const [data, setData] = useState<unknown>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const init = useCallback(
-    (curParams: Record<string, string>) => {
-      useMount(() => {
-        setLoading(true);
-        service(curParams).then((res) => {
-          setData(res);
-          setLoading(false);
-          options.onSuccess?.(res);
-        }).catch((error) => {
-          setLoading(false);
-          options.onError?.(error);
-        });
+  const init = useCallback((curParams: Record<string, string>) => {
+    useMount(() => {
+      setLoading(true);
+      service(curParams).then((res) => {
+        setData(res);
+        setLoading(false);
+        options.onSuccess?.(res);
+      }).catch((error) => {
+        setLoading(false);
+        options.onError?.(error);
       });
-    }, [service]
-  );
+    });
+  }, [service]);
 
   useMount(() => {
     if (!options.manual) {
