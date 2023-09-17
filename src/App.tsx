@@ -38,7 +38,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <>
+    <div>
       <p>data: {JSON.stringify(data)}</p>
       <p>loading: {`${loading}`}</p>
       <p>
@@ -52,7 +52,7 @@ const App: React.FC = () => {
       <button type="button" onClick={onClickHandler}>
         update
       </button>
-    </>
+    </div>
   );
 };
 
