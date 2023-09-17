@@ -1,41 +1,59 @@
+import { useMutation, useQuery } from '@apollo/client';
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '../public/vite.svg';
-import './App.css';
+import { FIND_ONE, UPDATE_ONE } from './graphql/demo';
 
-function App() {
-  const [count, setCount] = useState(0);
+const App: React.FC = () => {
+  const [name, setName] = useState('');
+  const [desc, setDesc] = useState('');
+
+  const { loading, data } = useQuery(FIND_ONE, {
+    variables: {
+      id: 2,
+    },
+  });
+
+  const [update] = useMutation(UPDATE_ONE);
+
+  const onNameChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
+  const onDescChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDesc(e.target.value);
+  };
+
+  const onClickHandler = () => {
+    update({
+      variables: {
+        id: 2,
+        params: {
+          name,
+          desc,
+          tel: 'asdf',
+          password: 'lkjalksdjf',
+          account: 'asdfasdf',
+        },
+      },
+    });
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button type="button" onClick={() => setCount((val) => val + 1)}>
-          count is
-          {' '}
-          {count}
-        </button>
-        <p>
-          Edit
-          {' '}
-          <code>src/App.tsx</code>
-          {' '}
-          and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+      <p>data: {JSON.stringify(data)}</p>
+      <p>loading: {`${loading}`}</p>
+      <p>
+        name:
+        <input onChange={onNameChangeHandler} />
       </p>
+      <p>
+        desc:
+        <input onChange={onDescChangeHandler} />
+      </p>
+      <button type="button" onClick={onClickHandler}>
+        update
+      </button>
     </>
   );
-}
+};
 
 export default App;
