@@ -1,11 +1,9 @@
 import { useMutation, useQuery } from '@apollo/client';
-import { useState } from 'react';
+import { Button, Calendar, Form, Input } from 'antd-mobile';
+import { useEffect } from 'react';
 import { FIND_ONE, UPDATE_ONE } from './graphql/demo';
 
 const App: React.FC = () => {
-  const [name, setName] = useState('');
-  const [desc, setDesc] = useState('');
-
   const { loading, data } = useQuery(FIND_ONE, {
     variables: {
       id: 2,
@@ -14,21 +12,13 @@ const App: React.FC = () => {
 
   const [update] = useMutation(UPDATE_ONE);
 
-  const onNameChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
-
-  const onDescChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDesc(e.target.value);
-  };
-
-  const onClickHandler = () => {
+  const onClickHandler = (v: unknown) => {
+    console.log(v);
     update({
       variables: {
         id: 2,
         params: {
-          name,
-          desc,
+          ...v,
           tel: 'asdf',
           password: 'lkjalksdjf',
           account: 'asdfasdf',
@@ -37,21 +27,38 @@ const App: React.FC = () => {
     });
   };
 
+  useEffect(() => {
+    document.documentElement.setAttribute('data-prefers-color-scheme', 'dark');
+  }, []);
+
   return (
     <div>
+      <Calendar
+          selectionMode='single'
+          onChange={val => {
+            console.log(val)
+          }}
+        />
+      
       <p>data: {JSON.stringify(data)}</p>
       <p>loading: {`${loading}`}</p>
-      <p>
-        name:
-        <input onChange={onNameChangeHandler} />
-      </p>
-      <p>
-        desc:
-        <input onChange={onDescChangeHandler} />
-      </p>
-      <button type="button" onClick={onClickHandler}>
-        update
-      </button>
+
+      <Form
+        layout="horizontal"
+        onFinish={onClickHandler}
+        footer={
+          <Button block type="submit" color="primary" size="large">
+            提交
+          </Button>
+        }
+      >
+        <Form.Item name="name" label="名称">
+          <Input />
+        </Form.Item>
+        <Form.Item name="desc" label="描述">
+          <Input />
+        </Form.Item>
+      </Form>
     </div>
   );
 };
