@@ -15,7 +15,8 @@
     "antd-mobile": "^5.32.4",
     "graphql": "^16.8.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.16.0"
   },
   "devDependencies": {
     "@apollo/server": "^4.9.3",
