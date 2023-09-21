@@ -17,3 +17,14 @@ mutation studentLogin($account: String!, $password: String!){
   }
 }
 `;
+
+export const GET_STUDENT_INFO = gql`
+query findStudent($id: Float!){
+  findStudent(id: $id){
+    id
+    name
+    tel
+    avatar
+  }
+}
+`;
