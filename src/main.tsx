@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './index.css';
 import { ApolloProvider } from '@apollo/client';
 import { ConfigProvider } from 'antd-mobile';
 import zhCN from 'antd-mobile/es/locales/zh-CN';
@@ -8,6 +7,7 @@ import apolloClient from './utils/apollo';
 import App from './App';
 import { RegisterPage } from './pages/register/RegisterPage';
 import { LoginPage } from './pages/login/LoginPage';
+import './theme.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <ConfigProvider locale={zhCN}>
