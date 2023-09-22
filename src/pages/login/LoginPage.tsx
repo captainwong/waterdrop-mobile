@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { EyeInvisibleOutline, EyeOutline } from 'antd-mobile-icons';
 import md5 from 'md5';
 import { AUTH_TOKEN } from '@/utils/const';
+import { useStudentInfoContext } from '@/hooks/studentHooks';
 import { STUDENT_LOGIN } from '../../graphql/student';
 import styles from './LoginPage.module.less';
 import logo from '../../assets/henglogo@2x.png';
@@ -18,6 +19,7 @@ export const LoginPage: React.FC = () => {
   const [pwdVisible, setPwdVisible] = React.useState(false);
   const [login, { loading }] = useMutation(STUDENT_LOGIN);
   const navigate = useNavigate();
+  const {store} = useStudentInfoContext();
 
   const onFinish = async (v: IValue) => {
     const result = await login({
@@ -28,6 +30,7 @@ export const LoginPage: React.FC = () => {
     });
     if (result.data?.studentLogin?.code === 200) {
       localStorage.setItem(AUTH_TOKEN, result.data?.studentLogin?.data || '');
+      store.refetchHandler?.();
       Toast.show({
         content: '登录成功!',
         afterClose: () => {

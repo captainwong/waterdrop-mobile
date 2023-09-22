@@ -20,12 +20,22 @@ mutation studentLogin($account: String!, $password: String!){
 `;
 
 export const GET_STUDENT_INFO = gql`
-query findStudent($id: Float!){
-  findStudent(id: $id){
+query getStudentInfo{
+  getStudentInfo{
     id
     name
     tel
     avatar
+  }
+}
+`;
+
+export const UPDATE_STUDENT_INFO = gql`
+mutation updateStudentInfo($params: UpdateStudentDto!){
+  updateStudentInfo(params: $params){
+    code
+    message
+    data
   }
 }
 `;
