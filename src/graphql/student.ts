@@ -14,6 +14,7 @@ mutation studentLogin($account: String!, $password: String!){
   studentLogin(account: $account, password: $password){
     code
     message
+    data
   }
 }
 `;

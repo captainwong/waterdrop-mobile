@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { useLocation, useNavigate } from "react-router-dom";
+import { AUTH_TOKEN } from "@/utils/const";
 import { connectFactory, useAppContext } from "../utils/contextFactory";
 import { GET_STUDENT_INFO } from '../graphql/student';
 import { IStudent } from "../utils/types";
@@ -26,12 +27,14 @@ export const useGetStudentInfo = () => {
         return;
       }
       
+      localStorage.removeItem(AUTH_TOKEN);
       setStore({ refetchHandler: refetch });
       if (!location.pathname.startsWith("/login")) {
         navigate(`/login?redirect=${location.pathname}`);
       }
     },
     onError: () => {
+      localStorage.removeItem(AUTH_TOKEN);
       setStore({ refetchHandler: refetch });
       if (!location.pathname.startsWith("/login")) {
         navigate(`/login?redirect=${location.pathname}`);
