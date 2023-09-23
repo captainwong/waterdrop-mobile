@@ -8,7 +8,7 @@ const useUploadOSS = () => {
   const upload = async (file: File) => {
     console.log(file);
     const formData = new FormData();
-    const data = d.getOSSInfo;
+    const { data } = d.getOSSInfo;
     const ext = file.name.split('.').pop();
     const fileName = `${Date.now()}.${ext}`;
     const key = `images/${fileName}`;

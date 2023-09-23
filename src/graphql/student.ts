@@ -22,10 +22,14 @@ export const STUDENT_LOGIN = gql`
 export const GET_STUDENT_INFO = gql`
   query getStudentInfo {
     getStudentInfo {
-      id
-      name
-      tel
-      avatar
+      code
+      message
+      data {
+        id
+        name
+        tel
+        avatar
+      }
     }
   }
 `;

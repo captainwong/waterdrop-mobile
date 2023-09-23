@@ -2,12 +2,16 @@ import { gql } from '@apollo/client';
 
 const GET_OSS_INFO = gql`
   query getOSSInfo {
-    getOSSInfo {
-      expire
-      policy
-      signature
-      accessId
-      host
+    getOSSInfo{
+        code
+        message
+        data {
+          expire
+          policy
+          signature
+          accessId
+          host
+        }
     }
   }
 `;
