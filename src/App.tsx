@@ -1,5 +1,7 @@
 import { useMutation } from '@apollo/client';
-import { Button, Form, ImageUploader, Input } from 'antd-mobile';
+import {
+  Button, Form, ImageUploader, Input,
+} from 'antd-mobile';
 import { useEffect } from 'react';
 import { UPDATE_ONE } from './graphql/demo';
 import useUploadOSS from './hooks/useUploadOSS';

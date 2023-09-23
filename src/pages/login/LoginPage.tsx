@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { useMutation } from '@apollo/client';
-import { Button, Form, Input, Space, Toast } from 'antd-mobile';
+import {
+  Button, Form, Input, Space, Toast,
+} from 'antd-mobile';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { EyeInvisibleOutline, EyeOutline } from 'antd-mobile-icons';

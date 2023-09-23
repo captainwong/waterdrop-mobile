@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { useEffect } from 'react';
-import { Button, Form, ImageUploader, Input, Toast } from 'antd-mobile';
+import {
+  Button, Form, ImageUploader, Input, Toast,
+} from 'antd-mobile';
 import { useStudentInfoContext } from '@/hooks/studentHooks';
 import { useMutation } from '@apollo/client';
 import { UPDATE_STUDENT_INFO } from '@/graphql/student';
