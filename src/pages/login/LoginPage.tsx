@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { useMutation } from '@apollo/client';
 import { Button, Form, Input, Space, Toast } from 'antd-mobile';
 import React from 'react';
@@ -19,7 +20,7 @@ export const LoginPage: React.FC = () => {
   const [pwdVisible, setPwdVisible] = React.useState(false);
   const [login, { loading }] = useMutation(STUDENT_LOGIN);
   const navigate = useNavigate();
-  const {store} = useStudentInfoContext();
+  const { store } = useStudentInfoContext();
 
   const onFinish = async (v: IValue) => {
     const result = await login({
@@ -53,7 +54,7 @@ export const LoginPage: React.FC = () => {
       <Form
         layout="horizontal"
         onFinish={onFinish}
-        footer={
+        footer={(
           <Button
             block
             type="submit"
@@ -63,7 +64,7 @@ export const LoginPage: React.FC = () => {
           >
             登录
           </Button>
-        }
+        )}
       >
         <Form.Item
           name="account"
@@ -95,7 +96,7 @@ export const LoginPage: React.FC = () => {
               message: '密码必须是6到32位（字母，数字，下划线，减号）',
             },
           ]}
-          extra={
+          extra={(
             <div>
               {pwdVisible ? (
                 <EyeInvisibleOutline onClick={() => setPwdVisible(false)} />
@@ -103,7 +104,7 @@ export const LoginPage: React.FC = () => {
                 <EyeOutline onClick={() => setPwdVisible(true)} />
               )}
             </div>
-          }
+          )}
         >
           <Input
             type={pwdVisible ? 'text' : 'password'}

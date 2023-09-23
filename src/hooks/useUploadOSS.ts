@@ -1,5 +1,5 @@
-import { useQuery } from "@apollo/client"
-import GET_OSS_INFO from "../graphql/oss"
+import { useQuery } from '@apollo/client';
+import GET_OSS_INFO from '../graphql/oss';
 
 const useUploadOSS = () => {
   const { data: d } = useQuery(GET_OSS_INFO);

@@ -20,8 +20,7 @@ function getCtxProvider<T>(
       () => ({
         key,
         store,
-        setStore: (payload = {}) =>
-          setStore((prev) => ({ ...prev, ...payload })),
+        setStore: (payload = {}) => setStore((prev) => ({ ...prev, ...payload })),
       }),
       [store],
     );
@@ -70,12 +69,11 @@ export function connectFactory<T>(key: string, defaultValue: T) {
     CurCtx = new Ctx<T>(key, defaultValue);
   }
 
-  return (Child: React.FC<any>) => (props: any) =>
-    (
-      <CurCtx.Provider>
-        <Child {...props} />
-      </CurCtx.Provider>
-    );
+  return (Child: React.FC<any>) => (props: any) => (
+    <CurCtx.Provider>
+      <Child {...props} />
+    </CurCtx.Provider>
+  );
 }
 
 export default Ctx;

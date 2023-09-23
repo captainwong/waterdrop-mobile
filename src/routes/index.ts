@@ -1,7 +1,7 @@
-import { RegisterPage } from "@/pages/register/RegisterPage";
-import { LoginPage } from "@/pages/login/LoginPage";
-import { MyPage } from "@/pages/my/MyPage";
-import { ROUTE_KEYS } from "./routes";
+import { RegisterPage } from '@/pages/register/RegisterPage';
+import { LoginPage } from '@/pages/login/LoginPage';
+import { MyPage } from '@/pages/my/MyPage';
+import { ROUTE_KEYS } from './routes';
 
 export const ROUTE_COMPONENTS = {
   [ROUTE_KEYS.REGISTER]: RegisterPage,

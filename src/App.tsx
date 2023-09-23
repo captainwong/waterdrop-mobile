@@ -29,15 +29,15 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div>      
+    <div>
       <Form
         layout="horizontal"
         onFinish={onClickHandler}
-        footer={
+        footer={(
           <Button block type="submit" color="primary" size="large">
             提交
           </Button>
-        }
+        )}
       >
         <Form.Item name="name" label="名称">
           <Input />
@@ -45,7 +45,7 @@ const App: React.FC = () => {
         <Form.Item name="desc" label="描述">
           <Input />
         </Form.Item>
-        <Form.Item name="avatar" label="头像">          
+        <Form.Item name="avatar" label="头像">
           <ImageUploader upload={upload} />
         </Form.Item>
       </Form>

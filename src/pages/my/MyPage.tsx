@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { useEffect } from 'react';
 import { Button, Form, ImageUploader, Input, Toast } from 'antd-mobile';
 import { useStudentInfoContext } from '@/hooks/studentHooks';
@@ -56,7 +57,7 @@ export const MyPage: React.FC = () => {
             });
           }
         }}
-        footer={
+        footer={(
           <Button
             block
             type="submit"
@@ -66,7 +67,7 @@ export const MyPage: React.FC = () => {
           >
             提交
           </Button>
-        }
+        )}
       >
         <Form.Header>个人信息</Form.Header>
         <Form.Item
@@ -95,7 +96,7 @@ export const MyPage: React.FC = () => {
               message: '手机号格式不正确',
             },
           ]}
-        >          
+        >
           <Input placeholder="请输入手机号" clearable />
         </Form.Item>
 
@@ -109,10 +110,7 @@ export const MyPage: React.FC = () => {
             },
           ]}
         >
-          <ImageUploader
-            maxCount={1}
-            upload={upload}
-          />
+          <ImageUploader maxCount={1} upload={upload} />
         </Form.Item>
       </Form>
     </div>

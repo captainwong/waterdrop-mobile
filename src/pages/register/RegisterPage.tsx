@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { useMutation } from '@apollo/client';
 import { Button, Form, Input, Space, Toast } from 'antd-mobile';
 import React from 'react';
@@ -58,7 +59,7 @@ export const RegisterPage: React.FC = () => {
         form={form}
         layout="horizontal"
         onFinish={onFinish}
-        footer={
+        footer={(
           <Button
             loading={loading}
             block
@@ -68,7 +69,7 @@ export const RegisterPage: React.FC = () => {
           >
             注册
           </Button>
-        }
+        )}
       >
         <Form.Item
           name="account"

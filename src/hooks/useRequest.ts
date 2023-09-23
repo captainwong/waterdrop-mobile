@@ -9,16 +9,16 @@ interface IUseRequest {
 }
 
 /*
-* useRequest
-* @description: React hook that runs a request
-* @param {function} service - Request function to run
-* @param {object} options - Options object
-* @param {object} options.params - Params to pass to the request function
-* @param {boolean} options.manual - Whether to manually run the request
-* @param {function} options.onSuccess - Callback function to run on success
-* @param {function} options.onError - Callback function to run on error
-* @returns {object} - Object containing loading state, data, and run function
-*/
+ * useRequest
+ * @description: React hook that runs a request
+ * @param {function} service - Request function to run
+ * @param {object} options - Options object
+ * @param {object} options.params - Params to pass to the request function
+ * @param {boolean} options.manual - Whether to manually run the request
+ * @param {function} options.onSuccess - Callback function to run on success
+ * @param {function} options.onError - Callback function to run on error
+ * @returns {object} - Object containing loading state, data, and run function
+ */
 const useRequest = (
   service: (params: Record<string, string>) => Promise<unknown>,
   options: IUseRequest,
@@ -26,19 +26,22 @@ const useRequest = (
   const [data, setData] = useState<unknown>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const init = useCallback((curParams: Record<string, string>) => {
-    useMount(() => {
+  const init = useCallback(
+    (curParams: Record<string, string>) => {
       setLoading(true);
-      service(curParams).then((res) => {
-        setData(res);
-        setLoading(false);
-        options.onSuccess?.(res);
-      }).catch((error) => {
-        setLoading(false);
-        options.onError?.(error);
-      });
-    });
-  }, [service]);
+      service(curParams)
+        .then((res) => {
+          setData(res);
+          setLoading(false);
+          options.onSuccess?.(res);
+        })
+        .catch((error) => {
+          setLoading(false);
+          options.onError?.(error);
+        });
+    },
+    [service],
+  );
 
   useMount(() => {
     if (!options.manual) {
