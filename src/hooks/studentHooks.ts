@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { AUTH_TOKEN } from '@/utils/const';
 import { connectFactory, useAppContext } from '../utils/contextFactory';
 import { GET_STUDENT_INFO } from '../graphql/student';
-import { IStudent } from '../utils/types';
+import { IStudent, TStudentQuery } from '../types/student';
 
 const STUDENT_INFO = 'STUDENT_INFO';
 const DEFAULT_STUDENT_VALUE = {};
@@ -18,14 +18,14 @@ export const useGetStudentInfo = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { loading, refetch } = useQuery<{ getStudentInfo: IStudent }>(
+  const { loading, refetch } = useQuery<TStudentQuery>(
     GET_STUDENT_INFO,
     {
       onCompleted: (data) => {
-        if (data.getStudentInfo) {
+        if (data.getStudentInfo.data) {
           const {
             id, name, desc, tel, avatar,
-          } = data.getStudentInfo;
+          } = data.getStudentInfo.data;
           setStore({
             id, name, desc, tel, avatar, refetchHandler: refetch,
           });

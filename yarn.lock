@@ -3618,6 +3618,11 @@ regexp.prototype.flags@^1.5.0, regexp.prototype.flags@^1.5.1:
     define-properties "^1.2.0"
     set-function-name "^2.0.0"
 
+reset-css@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.npmmirror.com/reset-css/-/reset-css-5.0.2.tgz#67432ee97f1dc133b87b7e1475cdf0bd19556ed8"
+  integrity sha512-YtgUGSq5z5W0NPSjsBW7ys7rtWa8P8AiE7S6Fg3d1TQCPpAodgYyLuZYlU0AOsLtprk/fC9ormHN/0pAavVIDw==
+
 resize-observer-polyfill@^1.5.1:
   version "1.5.1"
   resolved "https://registry.npmmirror.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"

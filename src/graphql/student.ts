@@ -35,11 +35,17 @@ export const GET_STUDENT_INFO = gql`
 `;
 
 export const UPDATE_STUDENT_INFO = gql`
-  mutation updateStudentInfo($params: UpdateStudentDto!) {
-    updateStudentInfo(params: $params) {
-      code
-      message
-      data
+  mutation updateStudentInfo($dto: StudentInputDto!){
+    updateStudentInfo(dto: $dto){
+        code
+        message
+        data{
+          id
+          name
+          tel
+          avatar
+        }
     }
+    
   }
 `;

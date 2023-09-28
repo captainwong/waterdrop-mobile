@@ -1,6 +1,6 @@
 import { DotLoading } from 'antd-mobile';
 import { connect, useGetStudentInfo } from '../../hooks/studentHooks';
-import { IPropsChildren } from '../../utils/types';
+import { IPropsChildren } from '../../types/types';
 
 const StudentInfoComponent = ({ children }: IPropsChildren) => {
   const { loading } = useGetStudentInfo();
