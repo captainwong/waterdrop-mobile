@@ -352,6 +352,13 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
+"@babel/runtime@^7.22.15":
+  version "7.23.1"
+  resolved "https://registry.npmmirror.com/@babel/runtime/-/runtime-7.23.1.tgz#72741dc4d413338a91dcb044a86f3c0bc402646d"
+  integrity sha512-hC2v6p8ZSI/W0HUzh3V8C5g+NwSKzKPtJwSpTjwl0o297GP9+ZLQSkdvHz46CM3LqyoXxq+5G9komY+eSqSO0g==
+  dependencies:
+    regenerator-runtime "^0.14.0"
+
 "@babel/template@^7.22.15", "@babel/template@^7.22.5":
   version "7.22.15"
   resolved "https://registry.npmmirror.com/@babel/template/-/template-7.22.15.tgz#09576efc3830f0430f4548ef971dde1350ef2f38"
@@ -829,6 +836,15 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
+"@tanem/svg-injector@^10.1.63":
+  version "10.1.64"
+  resolved "https://registry.npmmirror.com/@tanem/svg-injector/-/svg-injector-10.1.64.tgz#af2a672f66ad74c205ddcbeaa7ddfe7167915099"
+  integrity sha512-hfpZHO71x3/UtrjG4KOF3UU5D0ynMNjgeosK/4EuW2QEIcF6EVyQ6VEbbjm5RRDhvzTrvpNnQN1Kze9+2YT6cw==
+  dependencies:
+    "@babel/runtime" "^7.22.15"
+    content-type "^1.0.5"
+    tslib "^2.6.2"
+
 "@types/body-parser@*":
   version "1.19.3"
   resolved "https://registry.npmmirror.com/@types/body-parser/-/body-parser-1.19.3.tgz#fb558014374f7d9e56c8f34bab2042a3a07d25cd"
@@ -934,6 +950,11 @@
   version "15.7.5"
   resolved "https://registry.npmmirror.com/@types/prop-types/-/prop-types-15.7.5.tgz#5f19d2b85a98e9558036f6a3cacc8819420f05cf"
   integrity sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==
+
+"@types/prop-types@^15.7.6":
+  version "15.7.7"
+  resolved "https://registry.npmmirror.com/@types/prop-types/-/prop-types-15.7.7.tgz#f9361f7b87fd5d8188b2c998db0a1f47e9fb391a"
+  integrity sha512-FbtmBWCcSa2J4zL781Zf1p5YUBXQomPEcep9QZCfRfQgTxz3pJWiDFLebohZ9fFntX5ibzOkSsrJ0TEew8cAog==
 
 "@types/qs@*":
   version "6.9.8"
@@ -1557,7 +1578,7 @@ content-disposition@0.5.4:
   dependencies:
     safe-buffer "5.2.1"
 
-content-type@~1.0.4, content-type@~1.0.5:
+content-type@^1.0.5, content-type@~1.0.4, content-type@~1.0.5:
   version "1.0.5"
   resolved "https://registry.npmmirror.com/content-type/-/content-type-1.0.5.tgz#8b773162656d1d1086784c8f23a54ce6d73d7918"
   integrity sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==
@@ -3585,6 +3606,16 @@ react-router@6.16.0:
   dependencies:
     "@remix-run/router" "1.9.0"
 
+react-svg@^16.1.26:
+  version "16.1.26"
+  resolved "https://registry.npmmirror.com/react-svg/-/react-svg-16.1.26.tgz#01da79fe4a932ebc7ba786aeb49515bc8809e157"
+  integrity sha512-jH06DNCKQ3kMRT1VYAzE6xpFLqIKBF9TojuCfpUrZ080kvfv5gtjTPMCsKrla8cKa0zteM2cYNrnji5xm6xWmQ==
+  dependencies:
+    "@babel/runtime" "^7.22.15"
+    "@tanem/svg-injector" "^10.1.63"
+    "@types/prop-types" "^15.7.6"
+    prop-types "^15.8.1"
+
 react@^18.2.0:
   version "18.2.0"
   resolved "https://registry.npmmirror.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
@@ -4045,7 +4076,7 @@ tsconfig-paths@^3.14.2:
     minimist "^1.2.6"
     strip-bom "^3.0.0"
 
-tslib@^2.1.0, tslib@^2.3.0, tslib@^2.4.0, tslib@^2.4.1, tslib@^2.5.0, tslib@^2.6.0:
+tslib@^2.1.0, tslib@^2.3.0, tslib@^2.4.0, tslib@^2.4.1, tslib@^2.5.0, tslib@^2.6.0, tslib@^2.6.2:
   version "2.6.2"
   resolved "https://registry.npmmirror.com/tslib/-/tslib-2.6.2.tgz#703ac29425e7b37cd6fd456e92404d46d1f3e4ae"
   integrity sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==

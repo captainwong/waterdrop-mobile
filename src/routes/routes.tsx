@@ -1,6 +1,10 @@
+import mySvg from '@/assets/my.svg';
+import courseSvg from '@/assets/course.svg';
+
 interface IRoute {
   path: string;
   name: string;
+  icon?: string;
   showInMenu?: boolean;
   hideHeader?: boolean;
 }
@@ -14,11 +18,13 @@ export const ROUTE_CONFIG: Record<string, IRoute> = {
   [ROUTE_KEYS.HOME]: {
     path: '',
     name: '精品课程',
+    icon: courseSvg,
     showInMenu: true,
   },
   [ROUTE_KEYS.MY]: {
     path: 'my',
     name: '我的',
+    icon: mySvg,
     showInMenu: true,
   },
 };
