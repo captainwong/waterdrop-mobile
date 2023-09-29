@@ -1,11 +1,12 @@
 import { useProducts } from '@/services/product';
 import {
-  ErrorBlock, Grid, PullToRefresh, Toast,
+  ErrorBlock, Footer, Grid, InfiniteScroll, PullToRefresh, Toast,
 } from 'antd-mobile';
 import type { ToastHandler } from 'antd-mobile/es/components/toast';
 import { useRef } from 'react';
 import { ProductCard } from './ProductCard';
 import styles from './ProductList.module.less';
+import { InfiniteScrollContent } from './InfiniteScrollContent';
 
 interface IProps {
   category: string;
@@ -13,7 +14,9 @@ interface IProps {
 }
 
 export const ProductList = ({ category, keyword }:IProps) => {
-  const { loading, products, refreshProducts } = useProducts(category, keyword);
+  const {
+    loading, hasMore, products, refreshProducts, loadMoreProducts,
+  } = useProducts(category, keyword);
   const toastHandler = useRef<ToastHandler>();
 
   if (loading) {
@@ -42,6 +45,10 @@ export const ProductList = ({ category, keyword }:IProps) => {
         }
         </Grid>
       </PullToRefresh>
+      <InfiniteScroll hasMore={hasMore} loadMore={loadMoreProducts}>
+        <InfiniteScrollContent hasMore={hasMore} />
+      </InfiniteScroll>
+      { !hasMore && (<Footer label="我是有底线的" />) }
     </div>
   );
 };

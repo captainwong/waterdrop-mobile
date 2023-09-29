@@ -86,6 +86,7 @@ export const useProducts = (category = '', name = '') => {
 
   return {
     loading,
+    hasMore,
     products,
     refreshProducts,
     loadMoreProducts,
