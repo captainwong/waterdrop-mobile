@@ -1,19 +1,23 @@
-import { useGoTo } from '@/hooks';
-import { ROUTE_KEYS } from '@/routes/routes';
-import { Button } from 'antd-mobile';
+import { SearchBar } from 'antd-mobile';
 import styles from './HomePage.module.less';
+import { CategorySelect } from './category/CategorySelect';
 
 export const HomePage = () => {
-  const { go } = useGoTo();
+  const onSearch = (value: string) => {
+    console.log(value);
+  };
+
+  const onCategoryChange = (category: string) => {
+    console.log(category);
+  };
 
   return (
     <div className={styles.container}>
-      <Button onClick={() => {
-        go(ROUTE_KEYS.MY);
-      }}
-      >
-        编辑个人信息
-      </Button>
+      <SearchBar
+        placeholder="搜索课程"
+        onSearch={onSearch}
+      />
+      <CategorySelect onCategoryChange={onCategoryChange} />
     </div>
   );
 };
