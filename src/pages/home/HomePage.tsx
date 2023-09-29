@@ -1,15 +1,20 @@
 import { SearchBar } from 'antd-mobile';
+import { useState } from 'react';
+import { DEFAULT_CATEGORY } from '@/utils/const';
 import styles from './HomePage.module.less';
 import { CategorySelect } from './category/CategorySelect';
 import { ProductList } from './productList/ProductList';
 
 export const HomePage = () => {
+  const [category, setCategory] = useState(DEFAULT_CATEGORY);
+  const [keyword, setKeyword] = useState('');
+
   const onSearch = (value: string) => {
-    console.log(value);
+    setKeyword(value);
   };
 
-  const onCategoryChange = (category: string) => {
-    console.log(category);
+  const onCategoryChange = (value: string) => {
+    setCategory(value);
   };
 
   return (
@@ -17,9 +22,10 @@ export const HomePage = () => {
       <SearchBar
         placeholder="搜索课程"
         onSearch={onSearch}
+        onClear={() => onSearch('')}
       />
       <CategorySelect onCategoryChange={onCategoryChange} />
-      <ProductList />
+      <ProductList category={category} keyword={keyword} />
     </div>
   );
 };

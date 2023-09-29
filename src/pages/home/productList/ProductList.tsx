@@ -1,33 +1,47 @@
 import { useProducts } from '@/services/product';
-import { DotLoading, Grid } from 'antd-mobile';
-import { useEffect } from 'react';
-import styles from './ProductList.module.less';
+import {
+  ErrorBlock, Grid, PullToRefresh, Toast,
+} from 'antd-mobile';
+import type { ToastHandler } from 'antd-mobile/es/components/toast';
+import { useRef } from 'react';
 import { ProductCard } from './ProductCard';
+import styles from './ProductList.module.less';
 
 interface IProps {
   category: string;
   keyword: string;
 }
-// { category, keyword }:IProps
 
-export const ProductList = () => {
-  const { loading, products } = useProducts();
+export const ProductList = ({ category, keyword }:IProps) => {
+  const { loading, products, refreshProducts } = useProducts(category, keyword);
+  const toastHandler = useRef<ToastHandler>();
 
   if (loading) {
-    return <DotLoading />;
+    toastHandler.current = Toast.show({
+      icon: 'loading',
+      content: '加载中...',
+    });
+  } else {
+    toastHandler.current?.close();
+  }
+
+  if (products.length === 0) {
+    return <ErrorBlock status="empty" />;
   }
 
   return (
     <div className={styles.container}>
-      <Grid columns={2} gap={10}>
-        {
+      <PullToRefresh onRefresh={() => refreshProducts()}>
+        <Grid columns={2} gap={10}>
+          {
           products.map((product) => (
             <Grid.Item key={product.id}>
               <ProductCard product={product} />
             </Grid.Item>
           ))
         }
-      </Grid>
+        </Grid>
+      </PullToRefresh>
     </div>
   );
 };

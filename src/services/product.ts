@@ -5,7 +5,7 @@ import {
   IProduct,
   TProductCategoryQuery, TProductQuery, TProductsQuery,
 } from '@/types/product';
-import { DEFAULT_PAGE_SIZE } from '@/utils/const';
+import { DEFAULT_CATEGORY, DEFAULT_PAGE_SIZE } from '@/utils/const';
 import { useLazyQuery, useQuery } from '@apollo/client';
 import {
   useEffect, useMemo, useRef, useState,
@@ -45,7 +45,7 @@ export const useProducts = (category = '', name = '') => {
   const getProducts = async (pageNum = 1) => {
     const res = await get({
       variables: {
-        category,
+        category: category === DEFAULT_CATEGORY ? '' : category,
         name,
         page: {
           page: pageNum,
