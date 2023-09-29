@@ -1,5 +1,6 @@
 import { TCard } from './card';
 import { TGraphqlQuery } from './graphql';
+import { TOrganization } from './organization';
 
 export interface IProdcutCategory {
   key: string;
@@ -27,6 +28,7 @@ export interface IProduct {
   cover: string;
   banner: string;
   cards: TCard[];
+  organization?: TOrganization;
 }
 
 export type TProduct = Partial<IProduct>;

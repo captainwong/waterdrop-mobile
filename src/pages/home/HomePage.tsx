@@ -1,6 +1,7 @@
 import { SearchBar } from 'antd-mobile';
 import styles from './HomePage.module.less';
 import { CategorySelect } from './category/CategorySelect';
+import { ProductList } from './productList/ProductList';
 
 export const HomePage = () => {
   const onSearch = (value: string) => {
@@ -18,6 +19,7 @@ export const HomePage = () => {
         onSearch={onSearch}
       />
       <CategorySelect onCategoryChange={onCategoryChange} />
+      <ProductList />
     </div>
   );
 };

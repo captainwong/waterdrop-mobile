@@ -3,12 +3,12 @@ import { IMedia } from './media';
 
 export interface IOrganization {
   id: string;
+  name: string;
   businessLicense: string;
   identityCardBackImg: string;
   identityCardFrontImg: string;
   tags?: string;
   desc?: string;
-  name: string;
   tel?: string;
   address?: string;
   longitude?: string;

@@ -1,41 +1,19 @@
 import {
-  CREATE_OR_UPDATE_PRODUCT, DELETE_PRODUCT, GET_PRODUCT, GET_PRODUCTS, GET_PRODUCT_CATEGORY,
+  GET_PRODUCT, GET_PRODUCTS, GET_PRODUCT_CATEGORY,
 } from '@/graphql/product';
-import { TGraphqlMutation } from '@/types/graphql';
 import {
-  TProduct, TProductCategoryQuery, TProductQuery, TProductsQuery,
+  IProduct,
+  TProductCategoryQuery, TProductQuery, TProductsQuery,
 } from '@/types/product';
-import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
-import { useMemo } from 'react';
+import { DEFAULT_PAGE_SIZE } from '@/utils/const';
+import { useLazyQuery, useQuery } from '@apollo/client';
+import {
+  useEffect, useMemo, useRef, useState,
+} from 'react';
 
 export const useProductCategoryList = () => {
   const { data, loading } = useQuery<TProductCategoryQuery>(GET_PRODUCT_CATEGORY);
   return { categoryList: data?.getProductCategories.data || [], loading };
-};
-
-export type TCreateOrUpdateProduct = (
-  dto: TProduct,
-  id?: string,
-  onSuccess?: () => void,
-  onError?: (error: string) => void,
-) => void;
-
-export const useCreateOrUpdateProduct = ():[TCreateOrUpdateProduct, boolean] => {
-  const [commit, { loading }] = useMutation<TGraphqlMutation>(CREATE_OR_UPDATE_PRODUCT);
-  const createOrUpdateProduct: TCreateOrUpdateProduct = async (dto, id, onSuccess, onError) => {
-    const res = await commit({
-      variables: {
-        id,
-        dto,
-      },
-    });
-    if (res.data?.createOrUpdateProduct.code === 200) {
-      onSuccess?.();
-    } else {
-      onError?.(res.data?.createOrUpdateProduct.message || 'error');
-    }
-  };
-  return [createOrUpdateProduct, loading];
 };
 
 export const useProduct = (id: string) => {
@@ -58,66 +36,58 @@ export const useProduct = (id: string) => {
   };
 };
 
-export type TDeleteProduct = (
-  id: string,
-  onSuccess?: () => void,
-  onError?: (error: string) => void,
-) => void;
+export const useProducts = (category = '', name = '') => {
+  const [get, { loading }] = useLazyQuery<TProductsQuery>(GET_PRODUCTS);
+  const pageCur = useRef(1);
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [hasMore, setHasMore] = useState(true);
 
-export const useDeleteProduct = ():[TDeleteProduct, boolean] => {
-  const [commit, { loading }] = useMutation<TGraphqlMutation>(DELETE_PRODUCT);
-  const deleteProduct: TDeleteProduct = async (id: string, onSuccess, onError) => {
-    const res = await commit({
-      variables: {
-        id,
-      },
-    });
-    if (res.data?.deleteProduct.code === 200) {
-      onSuccess?.();
-    } else {
-      onError?.(res.data?.deleteProduct.message || 'error');
-    }
-  };
-  return [deleteProduct, loading];
-};
-
-export const useLazyProducts = () => {
-  const [get, { loading, error }] = useLazyQuery<TProductsQuery>(GET_PRODUCTS);
-
-  const getProducts = async (name?:string, pageCur?:number, pageSize?:number) => {
+  const getProducts = async (pageNum = 1) => {
     const res = await get({
       variables: {
+        category,
         name,
         page: {
-          page: pageCur,
-          pageSize,
+          page: pageNum,
+          pageSize: DEFAULT_PAGE_SIZE,
         },
       },
     });
-
-    if (error) {
-      return {
-        success: false,
-        error: error.message,
-      };
-    }
-
-    if (res?.data?.getProducts.code !== 200) {
-      return {
-        success: false,
-        error: res?.data?.getProducts.message || 'error',
-      };
-    }
-
+    const more = (res.data?.getProductsH5.page &&
+      (
+        (res.data.getProductsH5.page.page * DEFAULT_PAGE_SIZE)
+          < res.data.getProductsH5.page.total
+      )
+    ) || false;
     return {
-      success: true,
-      data: res?.data?.getProducts.data,
-      total: res?.data?.getProducts.page.total,
+      ps: res.data?.getProductsH5.data || [],
+      more,
     };
   };
 
+  const refreshProducts = async () => {
+    pageCur.current = 1;
+    const { ps, more } = await getProducts();
+    setHasMore(more);
+    setProducts(ps);
+  };
+
+  const loadMoreProducts = async () => {
+    if (!hasMore) return;
+    const { ps, more } = await getProducts(pageCur.current + 1);
+    setHasMore(more);
+    setProducts((prev) => [...prev, ...ps]);
+    pageCur.current += 1;
+  };
+
+  useEffect(() => {
+    refreshProducts();
+  }, [category, name]);
+
   return {
-    getProducts,
     loading,
+    products,
+    refreshProducts,
+    loadMoreProducts,
   };
 };

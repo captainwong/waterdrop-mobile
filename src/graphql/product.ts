@@ -60,8 +60,8 @@ export const GET_PRODUCT = gql`
 `;
 
 export const GET_PRODUCTS = gql`
-  query getProducts($page: PageInput!, $name: String){
-    getProducts(page: $page, name: $name){
+  query getProductsH5($page: PageInput!, $category: String, $name: String){
+    getProductsH5(page: $page, category: $category, name: $name){
       code
       message
       page{
