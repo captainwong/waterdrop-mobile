@@ -23,14 +23,14 @@ export const ProductCard = ({ product }:IProps) => {
         </div>
 
         <div className={styles.prices}>
-          <div className={styles.price}>
+          <span className={styles.price}>
             ￥
             {product.price}
-          </div>
-          <div className={styles.originalPrice}>
+          </span>
+          <span className={styles.originalPrice}>
             ￥
             {product.originalPrice}
-          </div>
+          </span>
         </div>
       </div>
     </div>
