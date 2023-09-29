@@ -3,7 +3,7 @@ import {
   ErrorBlock, Footer, Grid, InfiniteScroll, PullToRefresh, Toast,
 } from 'antd-mobile';
 import type { ToastHandler } from 'antd-mobile/es/components/toast';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { ProductCard } from './ProductCard';
 import styles from './ProductList.module.less';
 import { InfiniteScrollContent } from './InfiniteScrollContent';
@@ -19,14 +19,16 @@ export const ProductList = ({ category, keyword }:IProps) => {
   } = useProducts(category, keyword);
   const toastHandler = useRef<ToastHandler>();
 
-  if (loading) {
-    toastHandler.current = Toast.show({
-      icon: 'loading',
-      content: '加载中...',
-    });
-  } else {
-    toastHandler.current?.close();
-  }
+  useEffect(() => {
+    if (loading) {
+      toastHandler.current = Toast.show({
+        icon: 'loading',
+        content: '加载中...',
+      });
+    } else {
+      toastHandler.current?.close();
+    }
+  }, [loading]);
 
   if (products.length === 0) {
     return <ErrorBlock status="empty" />;
