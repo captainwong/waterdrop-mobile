@@ -48,7 +48,7 @@ export const ProductList = ({ category, keyword }:IProps) => {
       <InfiniteScroll hasMore={hasMore} loadMore={loadMoreProducts}>
         <InfiniteScrollContent hasMore={hasMore} />
       </InfiniteScroll>
-      { !hasMore && (<Footer label="我是有底线的" />) }
+      { !hasMore && (<Footer className={styles.footer} label="我是有底线的" />) }
     </div>
   );
 };

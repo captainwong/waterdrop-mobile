@@ -1,4 +1,4 @@
-import { DotLoading, Footer } from 'antd-mobile';
+import { DotLoading } from 'antd-mobile';
 import styles from './InfiniteScrollContent.module.less';
 
 interface IProps {

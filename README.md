@@ -31,3 +31,30 @@ If you are developing a production application, we recommend updating the config
 
 https://github.com/gxmari007/vite-plugin-eslint/issues/74#issuecomment-1647431890
 
+1. For anyone else stuck here, I've added a fix myself via patch-package:
+    ```bash
+    npm install --save-dev patch-package
+    ```
+
+2. Create the patch file patches/vite-plugin-eslint+1.8.1.dev.patch with this content:
+    ```diff
+    diff --git a/node_modules/vite-plugin-eslint/package.json b/node_modules/vite-plugin-eslint/package.json
+    index afbc41c..5f6d8f7 100644
+    --- a/node_modules/vite-plugin-eslint/package.json
+    +++ b/node_modules/vite-plugin-eslint/package.json
+    @@ -9,6 +9,7 @@
+      "types": "./dist/index.d.ts",
+      "exports": {
+      ".": {
+    +      "types": "./dist/index.d.ts",
+          "import": "./dist/index.mjs",
+          "require": "./dist/index.js"
+      }
+    ```
+
+3. Add a postinstall script in your package.json:
+    ```json
+    "postinstall": "patch-package",
+    ```
+
+4.`npm install`

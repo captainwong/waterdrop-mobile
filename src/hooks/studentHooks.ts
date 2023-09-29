@@ -24,10 +24,10 @@ export const useGetStudentInfo = () => {
       onCompleted: (data) => {
         if (data.getStudentInfo.data) {
           const {
-            id, name, desc, tel, avatar,
+            id, name, tel, avatar,
           } = data.getStudentInfo.data;
           setStore({
-            id, name, desc, tel, avatar, refetchHandler: refetch,
+            id, name, tel, avatar, refetchHandler: refetch,
           });
           if (location.pathname.startsWith('/login')) navigate('/');
           return;
