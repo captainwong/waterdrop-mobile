@@ -30,22 +30,24 @@ export const ProductList = ({ category, keyword }:IProps) => {
     }
   }, [loading]);
 
-  if (products.length === 0) {
-    return <ErrorBlock status="empty" />;
-  }
-
   return (
     <div className={styles.container}>
       <PullToRefresh onRefresh={() => refreshProducts()}>
-        <Grid columns={2} gap={10}>
-          {
-          products.map((product) => (
-            <Grid.Item key={product.id}>
-              <ProductCard product={product} />
-            </Grid.Item>
-          ))
+        {
+          products.length === 0 ? (
+            <ErrorBlock status="empty" />
+          ) : (
+            <Grid columns={2} gap={10}>
+              {
+                products.map((product) => (
+                  <Grid.Item key={product.id}>
+                    <ProductCard product={product} />
+                  </Grid.Item>
+                ))
+              }
+            </Grid>
+          )
         }
-        </Grid>
       </PullToRefresh>
       <InfiniteScroll hasMore={hasMore} loadMore={loadMoreProducts}>
         <InfiniteScrollContent hasMore={hasMore} />

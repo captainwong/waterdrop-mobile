@@ -59,6 +59,7 @@ export const useProducts = (category = '', name = '') => {
   const getProducts = async (pageNum = 1) => {
     const { latitude, longitude } = await getLocation();
     const res = await get({
+      fetchPolicy: 'network-only',
       variables: {
         latitude,
         longitude,
@@ -94,6 +95,7 @@ export const useProducts = (category = '', name = '') => {
     const { ps, more } = await getProducts(pageCur.current + 1);
     setHasMore(more);
     setProducts((prev) => [...prev, ...ps]);
+    console.log('products.count=', products.length);
     pageCur.current += 1;
   };
 
