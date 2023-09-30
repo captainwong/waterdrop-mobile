@@ -36,6 +36,20 @@ export const useProduct = (id: string) => {
   };
 };
 
+const getLocation = () => new Promise<{ latitude: number, longitude: number }>((resolve) => {
+  navigator.geolocation.getCurrentPosition((position) => {
+    resolve({
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
+    });
+  }, () => {
+    resolve({ latitude: 0, longitude: 0 });
+  }, {
+    timeout: 3000,
+    maximumAge: 1000 * 10,
+  });
+});
+
 export const useProducts = (category = '', name = '') => {
   const [get, { loading }] = useLazyQuery<TProductsQuery>(GET_PRODUCTS);
   const pageCur = useRef(1);
@@ -43,8 +57,11 @@ export const useProducts = (category = '', name = '') => {
   const [hasMore, setHasMore] = useState(true);
 
   const getProducts = async (pageNum = 1) => {
+    const { latitude, longitude } = await getLocation();
     const res = await get({
       variables: {
+        latitude,
+        longitude,
         category: category === DEFAULT_CATEGORY ? '' : category,
         name,
         page: {

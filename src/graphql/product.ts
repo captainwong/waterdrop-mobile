@@ -60,8 +60,8 @@ export const GET_PRODUCT = gql`
 `;
 
 export const GET_PRODUCTS = gql`
-  query getProductsH5($page: PageInput!, $category: String, $name: String){
-    getProductsH5(page: $page, category: $category, name: $name){
+  query getProductsH5($latitude: Float!, $longitude: Float!, $page: PageInput!, $category: String, $name: String){
+    getProductsH5(latitude: $latitude, longitude: $longitude, page: $page, category: $category, name: $name){
       code
       message
       page{
@@ -82,6 +82,7 @@ export const GET_PRODUCTS = gql`
         originalPrice
         cover
         banner
+        distance
         organization{
           id
           name

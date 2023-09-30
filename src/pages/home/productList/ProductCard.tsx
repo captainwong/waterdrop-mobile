@@ -14,11 +14,11 @@ export const ProductCard = ({ product }:IProps) => {
         <div className={styles.name}>{product.name}</div>
 
         <div className={styles.organization}>
-          <span className={styles.organizationName}>
+          <span className={styles.orgName}>
             {product.organization?.name}
           </span>
-          <span className={styles.organizationDistance}>
-            -
+          <span className={styles.distance}>
+            {product.distance}
           </span>
         </div>
 

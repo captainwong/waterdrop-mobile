@@ -27,6 +27,7 @@ export interface IProduct {
   originalPrice: string;
   cover: string;
   banner: string;
+  distance: string;
   cards: TCard[];
   organization?: TOrganization;
 }
