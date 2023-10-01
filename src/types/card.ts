@@ -1,4 +1,5 @@
 import { ICourse } from './course';
+import { TGraphqlQuery } from './graphql';
 
 export const CARD_TYPE = {
   COUNT: 'count', // 次卡
@@ -11,33 +12,10 @@ export interface ICard {
   type: string;
   count: number;
   duration: number;
-  course?: ICourse;
+  course: ICourse;
 }
 
 export type TCard = Partial<ICard>;
 
-export type TCardQuery = {
-  [key: string]: {
-    __typename: 'Query',
-    code: number,
-    message: string,
-    data: ICard,
-  }
-};
-
-export type TCardMutation = {
-  [key: string]: {
-    __typename: 'Mutation',
-    code: number,
-    message: string,
-  }
-};
-
-export type TCardsQuery = {
-  [key: string]: {
-    __typename: 'Query',
-    code: number,
-    message: string,
-    data: ICard[],
-  }
-};
+export type TCardQuery = TGraphqlQuery<ICard>;
+export type TCardsQuery = TGraphqlQuery<ICard[]>;

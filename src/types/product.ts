@@ -1,4 +1,4 @@
-import { TCard } from './card';
+import { ICard } from './card';
 import { TGraphqlQuery } from './graphql';
 import { TOrganization } from './organization';
 
@@ -28,7 +28,7 @@ export interface IProduct {
   cover: string;
   banner: string;
   distance: string;
-  cards: TCard[];
+  cards: ICard[];
   organization?: TOrganization;
 }
 

@@ -81,6 +81,6 @@ export interface ICourse {
   resavableTimeSlots: ITimeSlots[];
 }
 
-export type TCourse = Partial<ICourse>;
+export type TCourse = ICourse & { cardName?: string };
 export type TCourseQuery = TGraphqlQuery<ICourse>;
 export type TCoursesQuery = TGraphqlQuery<ICourse[]>;

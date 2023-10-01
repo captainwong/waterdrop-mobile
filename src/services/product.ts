@@ -1,6 +1,7 @@
 import {
   GET_PRODUCT, GET_PRODUCTS, GET_PRODUCT_CATEGORY, GET_RPODUCTS_BY_ORGANIZATION,
 } from '@/graphql/product';
+import { TCourse } from '@/types/course';
 import {
   IProduct,
   TProductCategoryQuery, TProductQuery, TProductsQuery,
@@ -24,15 +25,34 @@ export const useProduct = (id: string) => {
     },
   });
 
+  const courses = useMemo(() => {
+    const uniqueCourses: Record<string, TCourse> = {};
+    const cards = data?.getProductInfo.data?.cards || [];
+    cards.forEach((card) => {
+      const { id: courseId, ...rest } = card.course;
+      const existingCourse = uniqueCourses[courseId];
+      if (existingCourse) {
+        existingCourse.cardName = `${existingCourse.cardName}, ${card.name}`;
+      } else {
+        uniqueCourses[courseId] = { ...rest, cardName: card.name } as TCourse;
+      }
+    });
+    return Object.values(uniqueCourses);
+  }, [data?.getProductInfo.data?.cards]);
+
   const newProduct = useMemo(() => ({
     ...data?.getProductInfo.data,
     cards: data?.getProductInfo.data?.cards || [],
-    cover: [{ url: data?.getProductInfo.data?.cover }],
-    banner: [{ url: data?.getProductInfo.data?.banner }],
+    cover: data?.getProductInfo.data?.cover ? [{ url: data?.getProductInfo.data?.cover }] : [],
+    banner: data?.getProductInfo.data?.banner ? [{ url: data?.getProductInfo.data?.banner }] : [],
   }), [data]);
 
   return {
-    product: data?.getProductInfo.data ? newProduct : undefined, loading, refetch,
+    loading,
+    code: data?.getProductInfo.code,
+    product: data?.getProductInfo.data ? newProduct : undefined,
+    courses,
+    refetch,
   };
 };
 
