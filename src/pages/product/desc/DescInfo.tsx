@@ -1,21 +1,15 @@
-import { IProduct } from '@/types/product';
 import {
   Card,
-  Divider, DotLoading, Grid, Image,
+  Divider,
 } from 'antd-mobile';
 import { TCourse } from '@/types/course';
 import styles from './DescInfo.module.less';
 
 interface IProps {
-  loading: boolean;
   courses: TCourse[];
 }
 
-export const DescInfo = ({ loading, courses }: IProps) => {
-  if (loading) {
-    return <DotLoading />;
-  }
-
+export const DescInfo = ({ courses }: IProps) => {
   return (
     <div className={styles.container} key="product-desc">
       {

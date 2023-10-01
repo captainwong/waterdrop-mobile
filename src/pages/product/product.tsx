@@ -6,6 +6,7 @@ import styles from './product.module.less';
 import { NotFoundPage } from '../404/NotFound';
 import { BasicInfo } from './basic/BasicInfo';
 import { DescInfo } from './desc/DescInfo';
+import { Buy } from './buy/Buy';
 
 export const Product = () => {
   const { id } = useParams<{ id: string }>();
@@ -32,8 +33,9 @@ export const Product = () => {
 
   return (
     <div className={styles.container} key="product">
-      <BasicInfo loading={loading} product={product} />
-      <DescInfo loading={loading} courses={courses} />
+      <BasicInfo product={product} />
+      <DescInfo courses={courses} />
+      <Buy product={product} />
     </div>
   );
 };

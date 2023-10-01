@@ -1,19 +1,14 @@
 import { IProduct } from '@/types/product';
 import {
-  Divider, DotLoading, Grid, Image,
+  Divider, Grid, Image,
 } from 'antd-mobile';
 import styles from './BasicInfo.module.less';
 
 interface IProps {
-  loading: boolean;
   product: IProduct | undefined;
 }
 
-export const BasicInfo = ({ loading, product }: IProps) => {
-  if (loading) {
-    return <DotLoading />;
-  }
-
+export const BasicInfo = ({ product }: IProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
