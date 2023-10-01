@@ -12,6 +12,7 @@ interface IRoute {
 export const ROUTE_KEYS = {
   MY: 'my',
   HOME: 'home',
+  ORGANIZATION: 'organization',
 };
 
 export const ROUTE_CONFIG: Record<string, IRoute> = {
@@ -26,6 +27,11 @@ export const ROUTE_CONFIG: Record<string, IRoute> = {
     name: '我的',
     icon: mySvg,
     showInMenu: true,
+  },
+  [ROUTE_KEYS.ORGANIZATION]: {
+    path: 'organization/:id',
+    name: '门店详情',
+    showInMenu: false,
   },
 };
 

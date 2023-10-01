@@ -4,7 +4,7 @@ import { ApolloProvider } from '@apollo/client';
 import { ConfigProvider } from 'antd-mobile';
 import zhCN from 'antd-mobile/es/locales/zh-CN';
 import apolloClient from './utils/apollo';
-import { ROUTES } from './routes/routes';
+import { ROUTES } from './routes/menu';
 import { ROUTE_COMPONENTS } from './routes';
 import StudentInfo from './components/userInfo/StudentInfo';
 import { LoginPage } from './pages/login/LoginPage';

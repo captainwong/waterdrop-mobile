@@ -1,19 +1,33 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { IProduct } from '@/types/product';
 import { Image } from 'antd-mobile';
+import { useGoTo } from '@/hooks';
+import { ROUTE_KEYS } from '@/routes/menu';
 import styles from './ProductCard.module.less';
 
 interface IProps {
   product: IProduct;
 }
 
-export const ProductCard = ({ product }:IProps) => {
+export const ProductCard = ({ product }: IProps) => {
+  const { go } = useGoTo();
+  const goToOrganization = (id: string) => {
+    if (id) { go(ROUTE_KEYS.ORGANIZATION, { id }); }
+  };
+
   return (
     <div className={styles.container}>
       <Image src={product.cover} className={styles.cover} />
       <div className={styles.info}>
         <div className={styles.name}>{product.name}</div>
 
-        <div className={styles.organization}>
+        <div
+          role="presentation"
+          className={styles.organization}
+          onClick={
+            () => goToOrganization(product.organization?.id || '')
+          }
+        >
           <span className={styles.orgName}>
             {product.organization?.name}
           </span>

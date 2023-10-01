@@ -1,5 +1,5 @@
 import { TabBar } from 'antd-mobile';
-import { ROUTES } from '@/routes/routes';
+import { ROUTES } from '@/routes/menu';
 import { useGoTo, useMatchedRoute } from '@/hooks';
 import styles from './Footer.module.less';
 import { SvgWrapper } from '../svgWrapper/SvgWrapper';

@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { matchPath, useLocation, useNavigate } from 'react-router-dom';
-import { ROUTES, ROUTE_CONFIG, getRouteByKey } from '@/routes/routes';
+import { ROUTES, ROUTE_CONFIG, getRouteByKey } from '@/routes/menu';
 
 /**
  * 设置页面标题
