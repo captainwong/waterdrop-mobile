@@ -14,6 +14,7 @@ export const ROUTE_KEYS = {
   HOME: 'home',
   ORGANIZATION: 'organization',
   NOT_FOUND: 'notFound',
+  PRODUCT: 'product',
 };
 
 export const ROUTE_CONFIG: Record<string, IRoute> = {
@@ -32,12 +33,14 @@ export const ROUTE_CONFIG: Record<string, IRoute> = {
   [ROUTE_KEYS.ORGANIZATION]: {
     path: 'organization/:id',
     name: '门店详情',
-    showInMenu: false,
+  },
+  [ROUTE_KEYS.PRODUCT]: {
+    path: 'product/:id',
+    name: '商品详情',
   },
   [ROUTE_KEYS.NOT_FOUND]: {
     path: '*',
     name: '页面不存在',
-    showInMenu: false,
   },
 };
 

@@ -43,6 +43,15 @@ export const GET_PRODUCT = gql`
           course{
             id
             name
+            desc
+            group
+            baseAbility
+            limit
+            duration
+            reservation
+            cover
+            refund
+            note
           }
         }
       }

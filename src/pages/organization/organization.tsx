@@ -13,7 +13,7 @@ export const Organization = () => {
   const { id } = useParams<{ id: string }>();
   const { loading, organization, success } = useOrganization(id || '');
 
-  if (!id || !success) {
+  if (!id || (!loading && !success)) {
     return <NotFoundPage />;
   }
 

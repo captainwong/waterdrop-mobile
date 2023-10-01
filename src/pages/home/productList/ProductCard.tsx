@@ -11,7 +11,8 @@ interface IProps {
 
 export const ProductCard = ({ product }: IProps) => {
   const { go } = useGoTo();
-  const goToOrganization = (id: string) => {
+  const goToOrganization = (e: React.MouseEvent, id: string) => {
+    e.stopPropagation();
     if (id) { go(ROUTE_KEYS.ORGANIZATION, { id }); }
   };
 
@@ -25,7 +26,7 @@ export const ProductCard = ({ product }: IProps) => {
           role="presentation"
           className={styles.organization}
           onClick={
-            () => goToOrganization(product.organization?.id || '')
+            (e) => goToOrganization(e, product.organization?.id || '')
           }
         >
           <span className={styles.orgName}>

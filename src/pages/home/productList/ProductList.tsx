@@ -4,6 +4,8 @@ import {
 } from 'antd-mobile';
 import type { ToastHandler } from 'antd-mobile/es/components/toast';
 import { useEffect, useRef } from 'react';
+import { useGoTo } from '@/hooks';
+import { ROUTE_KEYS } from '@/routes/menu';
 import { ProductCard } from './ProductCard';
 import styles from './ProductList.module.less';
 import { InfiniteScrollContent } from './InfiniteScrollContent';
@@ -14,10 +16,14 @@ interface IProps {
 }
 
 export const ProductList = ({ category, keyword }:IProps) => {
+  const toastHandler = useRef<ToastHandler>();
   const {
     loading, hasMore, products, refreshProducts, loadMoreProducts,
   } = useProducts(category, keyword);
-  const toastHandler = useRef<ToastHandler>();
+  const { go } = useGoTo();
+  const goToProduct = (id: string) => {
+    if (id) { go(ROUTE_KEYS.PRODUCT, { id }); }
+  };
 
   useEffect(() => {
     if (loading) {
@@ -40,7 +46,7 @@ export const ProductList = ({ category, keyword }:IProps) => {
             <Grid columns={2} gap={10}>
               {
                 products.map((product) => (
-                  <Grid.Item key={product.id}>
+                  <Grid.Item key={product.id} onClick={() => goToProduct(product.id)}>
                     <ProductCard product={product} />
                   </Grid.Item>
                 ))

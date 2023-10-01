@@ -34,23 +34,16 @@ export const useProduct = (id: string) => {
       if (existingCourse) {
         existingCourse.cardName = `${existingCourse.cardName}, ${card.name}`;
       } else {
-        uniqueCourses[courseId] = { ...rest, cardName: card.name } as TCourse;
+        uniqueCourses[courseId] = { id: courseId, ...rest, cardName: card.name } as TCourse;
       }
     });
     return Object.values(uniqueCourses);
   }, [data?.getProductInfo.data?.cards]);
 
-  const newProduct = useMemo(() => ({
-    ...data?.getProductInfo.data,
-    cards: data?.getProductInfo.data?.cards || [],
-    cover: data?.getProductInfo.data?.cover ? [{ url: data?.getProductInfo.data?.cover }] : [],
-    banner: data?.getProductInfo.data?.banner ? [{ url: data?.getProductInfo.data?.banner }] : [],
-  }), [data]);
-
   return {
     loading,
     code: data?.getProductInfo.code,
-    product: data?.getProductInfo.data ? newProduct : undefined,
+    product: data?.getProductInfo.data,
     courses,
     refetch,
   };

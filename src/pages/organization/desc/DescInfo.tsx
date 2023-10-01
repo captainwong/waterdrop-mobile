@@ -16,7 +16,7 @@ export const DescInfo = ({ loading, organization }: IProps) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} key="org-desc">
       {
         organization.desc?.split('<br />').map((line) => (
           <div>
