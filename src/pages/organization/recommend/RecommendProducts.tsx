@@ -1,6 +1,5 @@
 import {
   Card,
-  Divider,
   DotLoading, Grid, Image, Result,
 } from 'antd-mobile';
 import { IOrganization } from '@/types/organization';

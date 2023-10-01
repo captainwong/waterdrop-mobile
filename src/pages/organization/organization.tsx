@@ -3,7 +3,6 @@
 import { useParams } from 'react-router-dom';
 import { useOrganization } from '@/services/organization';
 import { Divider } from 'antd-mobile';
-import { Hr } from '@/components/hr/Hr';
 import styles from './organization.module.less';
 import { BasicInfo } from './basic/BasicInfo';
 import { DescInfo } from './desc/DescInfo';
