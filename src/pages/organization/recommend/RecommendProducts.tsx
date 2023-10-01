@@ -4,6 +4,8 @@ import {
 } from 'antd-mobile';
 import { IOrganization } from '@/types/organization';
 import { useProductsByOrganization } from '@/services/product';
+import { useGoTo } from '@/hooks';
+import { ROUTE_KEYS } from '@/routes/menu';
 import styles from './RecommendProducts.module.less';
 
 interface IProps {
@@ -14,6 +16,11 @@ export const RecommendProducts = ({ organization }: IProps) => {
   const {
     loading: recLoading, products,
   } = useProductsByOrganization(organization?.id || '');
+
+  const { go } = useGoTo();
+  const goToProduct = (id: string) => {
+    go(ROUTE_KEYS.PRODUCT, { id });
+  };
 
   if (recLoading) {
     return <DotLoading />;
@@ -32,7 +39,11 @@ export const RecommendProducts = ({ organization }: IProps) => {
     <Card title="推荐课程" className={styles.container}>
       {
         products.map((product) => (
-          <div key={product.id}>
+          <div
+            role="presentation"
+            key={product.id}
+            onClick={() => goToProduct(product.id)}
+          >
             <Grid columns={12} className={styles.item}>
               <Grid.Item span={2}>
                 <Image src={product.cover} alt="cover" className={styles.cover} />

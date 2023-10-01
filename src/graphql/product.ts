@@ -33,6 +33,10 @@ export const GET_PRODUCT = gql`
         organization{
           id
           name
+          address
+          latitude
+          longitude
+          tel
         }
         cards{
           id
