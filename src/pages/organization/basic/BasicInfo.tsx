@@ -1,20 +1,15 @@
 import {
-  DotLoading, Grid, Image, Swiper,
+  Grid, Image, Swiper,
 } from 'antd-mobile';
 import { IOrganization } from '@/types/organization';
 import { CheckShieldOutline, EnvironmentOutline, PhoneFill } from 'antd-mobile-icons';
 import styles from './BasicInfo.module.less';
 
 interface IProps {
-  loading: boolean;
-  organization: IOrganization | undefined;
+  organization: IOrganization;
 }
 
-export const BasicInfo = ({ loading, organization }: IProps) => {
-  if (loading || !organization) {
-    return <DotLoading />;
-  }
-
+export const BasicInfo = ({ organization }: IProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.title}>

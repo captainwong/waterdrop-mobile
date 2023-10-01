@@ -2,7 +2,7 @@
 
 import { useParams } from 'react-router-dom';
 import { useOrganization } from '@/services/organization';
-import { Divider } from 'antd-mobile';
+import { Divider, Skeleton } from 'antd-mobile';
 import styles from './organization.module.less';
 import { BasicInfo } from './basic/BasicInfo';
 import { DescInfo } from './desc/DescInfo';
@@ -13,17 +13,26 @@ export const Organization = () => {
   const { id } = useParams<{ id: string }>();
   const { loading, organization, success } = useOrganization(id || '');
 
-  if (!id || (!loading && !success)) {
+  if (loading) {
+    return (
+      <>
+        <Skeleton.Title animated />
+        <Skeleton.Paragraph lineCount={5} animated />
+      </>
+    );
+  }
+
+  if (!id || !success || !organization) {
     return <NotFoundPage />;
   }
 
   return (
     <div className={styles.container}>
-      <BasicInfo loading={loading} organization={organization} />
+      <BasicInfo organization={organization} />
       <Divider />
-      <DescInfo loading={loading} organization={organization} />
+      <DescInfo organization={organization} />
       <Divider />
-      <RecommendProducts loading={loading} organization={organization} />
+      <RecommendProducts organization={organization} />
     </div>
   );
 };

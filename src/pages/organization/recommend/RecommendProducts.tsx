@@ -7,20 +7,19 @@ import { useProductsByOrganization } from '@/services/product';
 import styles from './RecommendProducts.module.less';
 
 interface IProps {
-  loading: boolean;
-  organization: IOrganization | undefined;
+  organization: IOrganization;
 }
 
-export const RecommendProducts = ({ loading, organization }: IProps) => {
+export const RecommendProducts = ({ organization }: IProps) => {
   const {
     loading: recLoading, products,
   } = useProductsByOrganization(organization?.id || '');
 
-  if (loading || !organization || recLoading) {
+  if (recLoading) {
     return <DotLoading />;
   }
 
-  if (!recLoading && products.length === 0) {
+  if (products.length === 0) {
     return (
       <Result
         status="warning"
