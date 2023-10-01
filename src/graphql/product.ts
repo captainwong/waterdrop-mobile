@@ -13,15 +13,6 @@ export const GET_PRODUCT_CATEGORY = gql`
   }
 `;
 
-export const CREATE_OR_UPDATE_PRODUCT = gql`
-  mutation createOrUpdateProduct($dto: PartialProductInputDto!, $id: String){
-    createOrUpdateProduct(dto: $dto, id: $id){
-      code
-      message
-    }
-  }
-`;
-
 export const GET_PRODUCT = gql`
   query getProductInfo($id: String!){
     getProductInfo(id: $id){
@@ -96,11 +87,36 @@ export const GET_PRODUCTS = gql`
   }
 `;
 
-export const DELETE_PRODUCT = gql`
-  mutation deleteProduct($id: String!){
-    deleteProduct(id: $id){
-      code
-      message
+export const GET_RPODUCTS_BY_ORGANIZATION = gql`
+query getProductsByOrgH5($organizationId:String!){
+  getProductsByOrgH5(organizationId: $organizationId){
+    code
+    message
+    page{
+      page
+      pageSize
+      total
+    }
+    data{
+      id
+      name
+      desc
+      category
+      stock
+      price
+      originalPrice
+      cover
+      banner
+      distance
+      organization{
+        id
+        name
+      }
+      cards{
+        id
+        name
+      }
     }
   }
+}
 `;

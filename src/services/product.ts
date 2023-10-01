@@ -1,5 +1,5 @@
 import {
-  GET_PRODUCT, GET_PRODUCTS, GET_PRODUCT_CATEGORY,
+  GET_PRODUCT, GET_PRODUCTS, GET_PRODUCT_CATEGORY, GET_RPODUCTS_BY_ORGANIZATION,
 } from '@/graphql/product';
 import {
   IProduct,
@@ -109,5 +109,18 @@ export const useProducts = (category = '', name = '') => {
     products,
     refreshProducts,
     loadMoreProducts,
+  };
+};
+
+export const useProductsByOrganization = (organizationId: string) => {
+  const { data, loading } = useQuery<TProductsQuery>(GET_RPODUCTS_BY_ORGANIZATION, {
+    variables: {
+      organizationId,
+    },
+  });
+  return {
+    loading,
+    code: data?.getProductsByOrgH5.code,
+    products: data?.getProductsByOrgH5.data || [],
   };
 };
