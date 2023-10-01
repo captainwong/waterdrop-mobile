@@ -15,6 +15,7 @@ export const ROUTE_KEYS = {
   ORGANIZATION: 'organization',
   NOT_FOUND: 'notFound',
   PRODUCT: 'product',
+  EDIT_MY: 'editMy',
 };
 
 export const ROUTE_CONFIG: Record<string, IRoute> = {
@@ -29,6 +30,10 @@ export const ROUTE_CONFIG: Record<string, IRoute> = {
     name: '我的',
     icon: mySvg,
     showInMenu: true,
+  },
+  [ROUTE_KEYS.EDIT_MY]: {
+    path: 'editMy',
+    name: '编辑资料',
   },
   [ROUTE_KEYS.ORGANIZATION]: {
     path: 'organization/:id',

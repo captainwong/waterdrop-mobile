@@ -1,118 +1,44 @@
-/* eslint-disable prettier/prettier */
-import { useEffect } from 'react';
-import {
-  Button, Form, ImageUploader, Input, Toast,
-} from 'antd-mobile';
+import { useGoTo } from '@/hooks';
 import { useStudentInfoContext } from '@/hooks/studentHooks';
-import useUploadOSS from '@/hooks/useUploadOSS';
-import { useUpdateStudentInfo } from '@/services/student';
+import { Grid, Image, List } from 'antd-mobile';
+import { ROUTE_KEYS } from '@/routes/menu';
+import { BankcardOutline, FaceRecognitionOutline, UnorderedListOutline } from 'antd-mobile-icons';
 import styles from './MyPage.module.less';
-import logo from '../../assets/henglogo@2x.png';
 
-export const MyPage: React.FC = () => {
-  const upload = useUploadOSS();
-  const [form] = Form.useForm();
+export const MyPage = () => {
   const { store } = useStudentInfoContext();
-  const { updateStudentInfo, loading } = useUpdateStudentInfo();
-
-  console.log('MyPage.store', store);
-
-  useEffect(() => {
-    if (!store.tel) {
-      return;
-    }
-    form.setFieldsValue({
-      name: store.name,
-      tel: store.tel,
-      avatar: [{ url: store.avatar }],
-    });
-  }, [store]);
+  const { go } = useGoTo();
 
   return (
     <div className={styles.container}>
-      <div className={styles.logo}>
-        <img src={logo} alt="logo" />
-      </div>
-      <Form
-        form={form}
-        layout="horizontal"
-        onFinish={async (values) => {
-          updateStudentInfo({
-            name: values.name,
-            tel: values.tel,
-            avatar: values.avatar[0]?.url || null,
-          }, () => {
-            Toast.show({
-              content: '修改成功!',
-              duration: 1000,
-              afterClose: () => {
-                store.refetchHandler?.();
-              },
-            });
-          }, (error) => {
-            Toast.show({
-              icon: 'fail',
-              content: error,
-              duration: 3000,
-            });
-          });
-        }}
-        footer={(
-          <Button
-            block
-            type="submit"
-            color="primary"
-            size="large"
-            loading={loading}
-          >
-            提交
-          </Button>
-        )}
-      >
-        <Form.Header>个人信息</Form.Header>
-        <Form.Item
-          name="name"
-          label="昵称"
-          rules={[
-            {
-              required: true,
-              message: '请输入昵称',
-            },
-          ]}
-        >
-          <Input placeholder="请输入昵称" clearable />
-        </Form.Item>
-
-        <Form.Item
-          name="tel"
-          label="手机号"
-          rules={[
-            {
-              required: true,
-              message: '请输入手机号',
-            },
-            {
-              pattern: /^1\d{10}$/,
-              message: '手机号格式不正确',
-            },
-          ]}
-        >
-          <Input placeholder="请输入手机号" clearable />
-        </Form.Item>
-
-        <Form.Item
-          name="avatar"
-          label="头像"
-          rules={[
-            {
-              required: true,
-              message: '请输入头像',
-            },
-          ]}
-        >
-          <ImageUploader maxCount={1} upload={upload} />
-        </Form.Item>
-      </Form>
+      <Grid columns={10} className={styles.grid}>
+        <Grid.Item span={4}>
+          <Image
+            className={styles.avatar}
+            src={store?.avatar}
+            alt="avatar"
+          />
+        </Grid.Item>
+        <Grid.Item span={6}>
+          <div className={styles.name}>
+            {store?.name}
+          </div>
+          <div className={styles.edit} role="presentation" onClick={() => go(ROUTE_KEYS.EDIT_MY)}>
+            编辑资料
+          </div>
+        </Grid.Item>
+      </Grid>
+      <List className={styles.list}>
+        <List.Item prefix={<FaceRecognitionOutline />}>
+          预约课程
+        </List.Item>
+        <List.Item prefix={<UnorderedListOutline />}>
+          我的课程表
+        </List.Item>
+        <List.Item prefix={<BankcardOutline />}>
+          我的消费卡
+        </List.Item>
+      </List>
     </div>
   );
 };
