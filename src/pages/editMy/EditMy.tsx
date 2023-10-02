@@ -1,13 +1,14 @@
 /* eslint-disable prettier/prettier */
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
-  Button, Form, ImageUploader, Input, Toast,
+  Button, CenterPopup, Form, ImageUploader, Input, Modal, Toast,
 } from 'antd-mobile';
 import { useStudentInfoContext } from '@/hooks/studentHooks';
 import useUploadOSS from '@/hooks/useUploadOSS';
 import { useUpdateStudentInfo } from '@/services/student';
 import logo from '@/assets/henglogo@2x.png';
 import { useGoTo } from '@/hooks';
+import { Cropper, ReactCropperElement } from 'react-cropper';
 import styles from './EditMy.module.less';
 
 export const EditMy: React.FC = () => {
@@ -16,6 +17,11 @@ export const EditMy: React.FC = () => {
   const { store } = useStudentInfoContext();
   const { updateStudentInfo, loading } = useUpdateStudentInfo();
   const { back } = useGoTo();
+  const [showCrop, setShowCrop] = useState(false);
+  const fileRef = useRef<File>();
+  const [imgSrc, setImgSrc] = useState<string>('');
+  const cropperRef = useRef<ReactCropperElement>(null);
+  const [imgCropped, setImgCropped] = useState<string>('');
 
   console.log('EditMy.store', store);
 
@@ -30,11 +36,51 @@ export const EditMy: React.FC = () => {
     });
   }, [store]);
 
+  const beforeUpload = async (file: File, files: File[]) => {
+    console.log('beforeUpload', { file, files });
+    fileRef.current = file;
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (e) => {
+      const dataURL = e.target?.result;
+      setImgSrc(dataURL as string);
+      setShowCrop(true);
+    };
+    return new Promise((resolve, reject) => {
+      const timer = setInterval(() => {
+        if (imgCropped) {
+          clearInterval(timer);
+          const newFile = new File([imgCropped], file.name, { type: file.type });
+          // newFile.uid = file.uid;
+          setImgCropped('');
+          resolve(newFile);
+        }
+      }, 100);
+    });
+  };
+
+  const onCrop = (e: any) => {
+    const cropper = cropperRef.current?.cropper;
+    const dataUrl = cropper?.getCroppedCanvas().toDataURL();
+    console.log('onCrop', { e, dataUrl });
+    setImgCropped(dataUrl as string);
+  };
+
+  const onCloseCrop = () => {
+    setShowCrop(false);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
         <img src={logo} alt="logo" />
       </div>
+      <CenterPopup
+        visible={showCrop}
+        onClose={onCloseCrop}
+      >
+        <Cropper src={imgSrc} crop={onCrop} ref={cropperRef} />
+      </CenterPopup>
       <Form
         form={form}
         layout="horizontal"
@@ -113,7 +159,8 @@ export const EditMy: React.FC = () => {
             },
           ]}
         >
-          <ImageUploader maxCount={1} upload={upload} />
+
+          <ImageUploader maxCount={1} upload={upload} beforeUpload={beforeUpload} />
         </Form.Item>
       </Form>
     </div>
