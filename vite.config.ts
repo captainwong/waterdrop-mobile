@@ -11,7 +11,9 @@ export default defineConfig({
     port: 5174,
     cors: true,
     proxy: {
-      '/graphql': 'http://192.168.50.162:3000'
+      //'/graphql': 'http://192.168.50.162:3000',
+      '/graphql': 'http://localhost:3000',
+      '/api': 'http://localhost:3000',
     }
   },
   plugins: [react(), eslint()],
