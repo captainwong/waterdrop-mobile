@@ -58,3 +58,94 @@ https://github.com/gxmari007/vite-plugin-eslint/issues/74#issuecomment-164743189
     ```
 
 4.`npm install`
+
+## Setup vscode remove explorer with nginx proxy
+
+VSCode connect to remote server, ssh running `yarn dev`, using nginx reverse proxy. without special treatment, the `hmr` would fail.
+
+Here is the [solution](https://github.com/vitejs/vite/discussions/6473#discussioncomment-4461746), thank you sir!
+
+My usage:
+
+`vite.config.ts`:
+```typescript
+export default defineConfig({
+  server: {
+    host: '0.0.0.0',
+    port: 5174,
+    cors: true,
+    proxy: {
+      //'/graphql': 'http://192.168.50.162:3000',
+      '/graphql': 'http://localhost:3000',
+      '/api': 'http://localhost:3000',
+    },
+    hmr: {
+      // host: 'http://waterdrop-mobile.captainwong.cn'
+      path: '/socket.io',
+      port: 5175,
+      clientPort: 80,
+    }
+  },
+  ...
+})
+```
+
+`nginx.conf` append under `http`:
+```conf
+map $http_upgrade $connection_upgrade {
+    default Upgrade;
+    '' close;
+}
+
+upstream wss-upstream {
+    server localhost:5175;
+}
+```
+
+`site.conf` in `sites-available`:
+```conf
+server {
+    server_name waterdrop-mobile.captainwong.cn;
+
+    listen 80;
+    #listen 443 ssl;
+    #listen [::]:443 ssl;
+    #proxy_ssl_server_name on;
+
+    #ssl_certificate        ./.cert/cert.pem;
+    #ssl_certificate_key    ./.cert/key.pem;
+
+    #ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    #ssl_prefer_server_ciphers on;
+    #ssl_ciphers "EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 #EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 EECDH #EDH+aRSA RC4 !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS";
+
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $connection_upgrade;
+    proxy_set_header Host $host;
+
+    proxy_redirect          off;
+    proxy_set_header        Host              $host;
+    proxy_set_header        X-Real-IP         $remote_addr;
+    proxy_set_header        X-Forwarded-For   $proxy_add_x_forwarded_for;
+    proxy_set_header        X-Forwarded-Proto $scheme;
+    client_max_body_size    10m;
+    client_body_buffer_size 128k;
+    proxy_connect_timeout   90;
+    proxy_send_timeout      90;
+    proxy_read_timeout      90;
+    proxy_buffers           32 4k;
+
+    chunked_transfer_encoding on;
+
+    location /socket.io {
+        proxy_pass http://wss-upstream;
+    }
+
+    location / {
+        proxy_pass http://localhost:5174;
+    }
+}
+```
+
+TODO: https

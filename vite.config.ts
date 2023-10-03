@@ -14,6 +14,12 @@ export default defineConfig({
       //'/graphql': 'http://192.168.50.162:3000',
       '/graphql': 'http://localhost:3000',
       '/api': 'http://localhost:3000',
+    },
+    hmr: {
+      // host: 'http://waterdrop-mobile.captainwong.cn'
+      path: '/socket.io',
+      port: 5175,
+      clientPort: 80,
     }
   },
   plugins: [react(), eslint()],
