@@ -81,9 +81,9 @@ export default defineConfig({
     },
     hmr: {
       // host: 'http://waterdrop-mobile.captainwong.cn'
-      path: '/socket.io',
-      port: 5175,
-      clientPort: 80,
+      path: '/socket.io', // this is the browser will connect to
+      port: 5175, // this is the hmr ws listening port
+      clientPort: 80, // this is the browser will connect to
     }
   },
   ...
