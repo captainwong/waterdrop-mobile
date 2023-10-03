@@ -28,9 +28,9 @@ export const Buy = () => {
 
   return (
     <div className={styles.container}>
-      <Button onClick={wxlogin}>
-        wxlogin
-      </Button>
+      <div className={styles.organization}>
+        
+      </div>
     </div>
   );
 };
