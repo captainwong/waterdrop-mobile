@@ -19,7 +19,7 @@ export default defineConfig({
       // host: 'http://waterdrop-mobile.captainwong.cn'
       path: '/socket.io',
       port: 6174,
-      clientPort: 80,
+      clientPort: 443,
     }
   },
   plugins: [react(), eslint()],

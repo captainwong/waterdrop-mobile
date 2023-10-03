@@ -16,6 +16,7 @@ export const ROUTE_KEYS = {
   NOT_FOUND: 'notFound',
   PRODUCT: 'product',
   EDIT_MY: 'editMy',
+  BUY: 'buy',
 };
 
 export const ROUTE_CONFIG: Record<string, IRoute> = {
@@ -42,6 +43,10 @@ export const ROUTE_CONFIG: Record<string, IRoute> = {
   [ROUTE_KEYS.PRODUCT]: {
     path: 'product/:id',
     name: '商品详情',
+  },
+  [ROUTE_KEYS.BUY]: {
+    path: 'buy/:id',
+    name: '购买课程',
   },
   [ROUTE_KEYS.NOT_FOUND]: {
     path: '*',

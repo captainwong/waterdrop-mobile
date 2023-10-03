@@ -6,6 +6,7 @@ export interface IStudent {
   tel: string;
   avatar: string;
   account: string;
+  wxOpenid?: string;
   refetchHandler?: () => void;
 }
 

@@ -4,6 +4,7 @@ import { Organization } from '@/pages/organization/organization';
 import { NotFoundPage } from '@/pages/404/NotFound';
 import { Product } from '@/pages/product/product';
 import { EditMy } from '@/pages/editMy/EditMy';
+import { Buy } from '@/pages/buy/buy';
 import { ROUTE_KEYS } from './menu';
 
 export const ROUTE_COMPONENTS = {
@@ -13,4 +14,5 @@ export const ROUTE_COMPONENTS = {
   [ROUTE_KEYS.ORGANIZATION]: Organization,
   [ROUTE_KEYS.NOT_FOUND]: NotFoundPage,
   [ROUTE_KEYS.PRODUCT]: Product,
+  [ROUTE_KEYS.BUY]: Buy,
 };
