@@ -1,6 +1,6 @@
 import {
   Card,
-  DotLoading, Grid, Image, Result,
+  Grid, Image, Result, Skeleton,
 } from 'antd-mobile';
 import { IOrganization } from '@/types/organization';
 import { useProductsByOrganization } from '@/services/product';
@@ -23,7 +23,12 @@ export const RecommendProducts = ({ organization }: IProps) => {
   };
 
   if (recLoading) {
-    return <DotLoading />;
+    return (
+      <>
+        <Skeleton.Title animated />
+        <Skeleton.Paragraph lineCount={5} animated />
+      </>
+    );
   }
 
   if (products.length === 0) {

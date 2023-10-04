@@ -29,7 +29,7 @@ export const GET_STUDENT_INFO = gql`
         name
         tel
         avatar
-        wx_openid
+        wxOpenid
       }
     }
   }

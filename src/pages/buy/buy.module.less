@@ -1,3 +1,88 @@
 .container {
-  background-color: white;
+  background-color: var(--common-background-color);
+}
+
+.organization {
+  padding: 10px;
+  line-height: 40px;
+  .logo {
+    width: 40px;
+    height: 40px;
+    float: left;
+    .logoImg {
+      border-radius: 50%;
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid var(--common-gray-color);
+    }
+  }
+  .orgName {
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 10px;
+    display: inline-block;
+    line-height: 40px;
+  }
+}
+
+.title {
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bolder;
+}
+
+.desc {
+  font-size: 14px;
+  color: var(--common-desc-color);
+  text-align: justify;
+  padding: 10px;
+}
+
+.count {
+  padding: 10px;
+  font-size: 16px;
+  color: var(--common-desc-color);
+}
+
+.stepper {
+  float: right;
+}
+
+.price {
+  text-align: right;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 20px;
+  color: var(--common-warning-color);
+}
+
+.originalPrice {
+  font-size: 12px;
+  color: #ccc;
+  text-decoration: line-through;
+  margin-left: 10px;
+}
+
+.user {
+  padding: 20px 10px;
+  font-size: 16px;
+  color: var(--common-desc-color);
+  .telValue {
+    float: right;
+  }
+}
+
+.buy {
+  position: fixed;
+  bottom: 0;
+  height: 60px;
+  text-align: center;
+  font-size: 18px;
+  width: 100%;
+  line-height: 60px;
+  border-top: 5px solid var(--common-background-color);
+  .buyBtn {
+    color: #fff;
+    background-color: var(--common-warning-color);
+  }
 }
