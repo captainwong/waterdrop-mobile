@@ -35,7 +35,7 @@ export const MyPage = () => {
         <List.Item prefix={<UnorderedListOutline />}>
           我的课程表
         </List.Item>
-        <List.Item prefix={<BankcardOutline />}>
+        <List.Item prefix={<BankcardOutline />} onClick={() => go(ROUTE_KEYS.MY_CARD)}>
           我的消费卡
         </List.Item>
       </List>

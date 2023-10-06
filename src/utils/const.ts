@@ -4,3 +4,7 @@ export const DEFAULT_CATEGORY = 'all_products';
 export const API_HOST_BASE = 'https://waterdrop-pc.captainwong.cn/api/v1/';
 export const API_WXLOGIN = 'wechat/wxlogin';
 export const APP_HOST_BASE = 'https://watercrop-mobile.captainwong.cn';
+export const DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss';
+export const DATE_FORMAT_DATE = 'YYYY-MM-DD';
+export const DATE_FORMAT_TIME = 'HH:mm:ss';
+export const DATE_FORMAT_TIME_SHORT = 'HH:mm';

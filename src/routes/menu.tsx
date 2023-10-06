@@ -17,6 +17,7 @@ export const ROUTE_KEYS = {
   PRODUCT: 'product',
   EDIT_MY: 'editMy',
   BUY: 'buy',
+  MY_CARD: 'myCard',
 };
 
 export const ROUTE_CONFIG: Record<string, IRoute> = {
@@ -47,6 +48,10 @@ export const ROUTE_CONFIG: Record<string, IRoute> = {
   [ROUTE_KEYS.BUY]: {
     path: 'buy/:id',
     name: '购买课程',
+  },
+  [ROUTE_KEYS.MY_CARD]: {
+    path: 'myCard',
+    name: '我的消费卡',
   },
   [ROUTE_KEYS.NOT_FOUND]: {
     path: '*',

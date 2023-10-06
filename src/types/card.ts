@@ -2,8 +2,8 @@ import { ICourse } from './course';
 import { TGraphqlQuery } from './graphql';
 
 export const CARD_TYPE = {
-  COUNT: 'count', // 次卡
-  DURATION: 'duration', // 日卡
+  COUNT: ['count', '次卡'], // 次卡
+  DURATION: ['duration', '日卡'], // 日卡
 };
 
 export interface ICard {
