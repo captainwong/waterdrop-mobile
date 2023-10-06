@@ -57,7 +57,7 @@ https://github.com/gxmari007/vite-plugin-eslint/issues/74#issuecomment-164743189
     "postinstall": "patch-package",
     ```
 
-4.`npm install`
+4. `npm install`
 
 ## Setup vscode remove explorer with nginx proxy
 

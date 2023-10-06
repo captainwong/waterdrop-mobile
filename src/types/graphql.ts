@@ -10,10 +10,11 @@ export type TGraphqlQuery<T = null> = {
   }
 };
 
-export type TGraphqlMutation = {
+export type TGraphqlMutation<T = null> = {
   [key: string]: {
     __typename: 'Mutation',
     code: number,
     message: string,
+    data: T,
   }
 };
