@@ -35,11 +35,20 @@
   }
 }
 
+// TODO: 名字太长怎么办，ellipsis 要怎样写
 .top {
   width: 100%;
   .name {
     margin-left: 5px;
-    font-size: 14px;
+    font-size: 16px;
+  }
+  .courseName {
+    width: 100%;
+    margin-left: 5px;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 

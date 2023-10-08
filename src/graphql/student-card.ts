@@ -22,7 +22,8 @@ export const GET_STUDENT_CARDS = gql`
           name
         }
         course {
-          id name
+          id
+          name
         }
         organization {
           id 

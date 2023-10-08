@@ -1,4 +1,5 @@
 import { ICard } from './card';
+import { ICourse } from './course';
 import { TGraphqlQuery } from './graphql';
 import { IOrganization } from './organization';
 
@@ -18,6 +19,7 @@ export interface IStudentCard {
   status: string;
   card: ICard;
   organization: IOrganization;
+  course: ICourse,
 }
 
 export type TStudentCard = Partial<IStudentCard>;

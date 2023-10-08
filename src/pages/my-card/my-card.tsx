@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
 import { useStudentCards } from '@/services/student-card';
 import {
+  Grid,
   ResultPage, Skeleton, Space, Tag,
 } from 'antd-mobile';
 import classNames from 'classnames';
 import { CardStatus } from '@/types/student-card';
-import { BankcardOutline } from 'antd-mobile-icons';
+import { BankcardOutline, EnvironmentOutline, LocationOutline } from 'antd-mobile-icons';
 import { CARD_TYPE } from '@/types/card';
 import dayjs from 'dayjs';
 import { DATE_FORMAT_DATE } from '@/utils/const';
@@ -48,35 +49,50 @@ export const MyCard = () => {
               [styles.depleted]: card.status === CardStatus.DEPLETED,
             })}
           >
-            <Space justify="between" className={styles.top}>
-              <span>
+            {/* <Space justify="between" className={styles.top}> */}
+            <Grid columns={100}>
+              <Grid.Item span={20}>
                 <BankcardOutline />
                 <span className={styles.name}>
                   {card.card.name}
                 </span>
-              </span>
+              </Grid.Item>
+              <Grid.Item span={55} className={styles.courseName}>
+                <span className={styles.courseName}>
+                  {card.course.name}
+                </span>
+              </Grid.Item>
               {
                 card.type === CARD_TYPE.COUNT[0] && (
-                  <Tag color="#fff" fill="outline">
-                    {CARD_TYPE.COUNT[1]}
-                    (
-                    余
-                    {card.remainingTimes}
-                    次
-                    )
-                  </Tag>
+                  <Grid.Item span={20}>
+                    <Tag color="#fff" fill="outline" className={styles.type}>
+                      {CARD_TYPE.COUNT[1]}
+                      (
+                      余
+                      {card.remainingTimes}
+                      次
+                      )
+                    </Tag>
+                  </Grid.Item>
                 )
               }
               {
                 card.type === CARD_TYPE.DURATION[0] && (
-                  <Tag color="warning" fill="outline">
-                    {CARD_TYPE.DURATION[1]}
-                  </Tag>
+                  <Grid.Item span={20}>
+                    <Tag color="warning" fill="outline" className={styles.type}>
+                      {CARD_TYPE.DURATION[1]}
+                    </Tag>
+
+                  </Grid.Item>
                 )
               }
-            </Space>
+              {/* </Space> */}
+            </Grid>
             <Space justify="between" className={styles.bottom}>
-              <span>{card.organization.name}</span>
+              <span>
+                <EnvironmentOutline />
+                {card.organization.name}
+              </span>
               <span>
                 有效期到：
                 {dayjs(card.expiresAt).format(DATE_FORMAT_DATE)}
