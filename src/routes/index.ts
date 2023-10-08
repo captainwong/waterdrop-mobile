@@ -7,6 +7,7 @@ import { EditMy } from '@/pages/editMy/EditMy';
 import { Buy } from '@/pages/buy/buy';
 import { MyCard } from '@/pages/my-card/my-card';
 import { ReserveCourse } from '@/pages/reserve-course/reserve-course';
+import { MyCourse } from '@/pages/my-course/my-course';
 import { ROUTE_KEYS } from './menu';
 
 export const ROUTE_COMPONENTS = {
@@ -19,4 +20,5 @@ export const ROUTE_COMPONENTS = {
   [ROUTE_KEYS.BUY]: Buy,
   [ROUTE_KEYS.MY_CARD]: MyCard,
   [ROUTE_KEYS.RESERVE_COURSE]: ReserveCourse,
+  [ROUTE_KEYS.MY_COURSE]: MyCourse,
 };

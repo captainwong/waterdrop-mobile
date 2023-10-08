@@ -6,7 +6,7 @@ import {
 } from 'antd-mobile';
 import classNames from 'classnames';
 import { CardStatus } from '@/types/student-card';
-import { BankcardOutline, EnvironmentOutline, LocationOutline } from 'antd-mobile-icons';
+import { BankcardOutline, EnvironmentOutline } from 'antd-mobile-icons';
 import { CARD_TYPE } from '@/types/card';
 import dayjs from 'dayjs';
 import { DATE_FORMAT_DATE } from '@/utils/const';

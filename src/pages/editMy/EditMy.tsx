@@ -17,8 +17,6 @@ export const EditMy: React.FC = () => {
   const { updateStudentInfo, loading } = useUpdateStudentInfo();
   const { back } = useGoTo();
 
-  console.log('EditMy.store', store);
-
   useEffect(() => {
     if (!store.tel) {
       return;

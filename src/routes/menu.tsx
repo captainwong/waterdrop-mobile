@@ -19,6 +19,7 @@ export const ROUTE_KEYS = {
   BUY: 'buy',
   MY_CARD: 'myCard',
   RESERVE_COURSE: 'reserveCourse',
+  MY_COURSE: 'myCourse',
 };
 
 export const ROUTE_CONFIG: Record<string, IRoute> = {
@@ -57,6 +58,10 @@ export const ROUTE_CONFIG: Record<string, IRoute> = {
   [ROUTE_KEYS.RESERVE_COURSE]: {
     path: 'reserveCourse',
     name: '预约课程',
+  },
+  [ROUTE_KEYS.MY_COURSE]: {
+    path: 'myCourse',
+    name: '我的课程',
   },
   [ROUTE_KEYS.NOT_FOUND]: {
     path: '*',

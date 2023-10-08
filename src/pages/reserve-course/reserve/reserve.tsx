@@ -1,7 +1,7 @@
 import { useReservableSchedules } from '@/services/schedule';
 import {
   Button,
-  Divider, DotLoading, Selector, Skeleton, Tabs, Toast,
+  Divider, Selector, Skeleton, Tabs, Toast,
 } from 'antd-mobile';
 import { useGetValidStudentCardsByCourse } from '@/services/student-card';
 import { useMemo, useState } from 'react';

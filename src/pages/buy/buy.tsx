@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { useParams, useSearchParams } from 'react-router-dom';
 import {
-  Divider, Grid, Modal, Skeleton, Stepper, Toast,
+  Divider, Grid, Skeleton, Stepper, Toast,
 } from 'antd-mobile';
 import { API_HOST_BASE, API_WXLOGIN } from '@/utils/const';
 import { useStudentInfoContext } from '@/hooks/studentHooks';
@@ -32,8 +32,6 @@ export const Buy = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showFail, setShowFail] = useState(false);
 
-  console.log('Buy', { id, wxloginResCode, wxloginResMsg });
-
   if (!id) {
     return <NotFoundPage />;
   }
@@ -55,7 +53,6 @@ export const Buy = () => {
     const url = new URL(`${API_HOST_BASE}${API_WXLOGIN}`);
     url.searchParams.append('studentId', store.id);
     url.searchParams.append('redirect', window.location.href);
-    console.log('wxlogin.url', url.toString());
     window.location.href = url.toString();
   };
 
@@ -81,18 +78,10 @@ export const Buy = () => {
       return;
     }
 
-    console.log('wxpayConfig', wxpayConfig);
-
-    // Modal.alert({
-    //   title: '支付信息',
-    //   content: <div>{JSON.stringify(wxpayConfig.wxpayConfig)}</div>,
-    // });
-
     WeixinJSBridge.invoke(
       'getBrandWCPayRequest',
       { ...wxpayConfig.wxpayConfig },
       (res: { err_msg: string }) => {
-        console.log('res', res);
         if (res.err_msg === 'get_brand_wcpay_request:ok') {
           setShowFail(false);
           setShowSuccess(true);
