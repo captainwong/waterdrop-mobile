@@ -45,6 +45,7 @@ export const EditMy: React.FC = () => {
             avatar: values.avatar[0]?.url || null,
           }, () => {
             Toast.show({
+              icon: 'success',
               content: '修改成功!',
               duration: 1000,
               afterClose: () => {

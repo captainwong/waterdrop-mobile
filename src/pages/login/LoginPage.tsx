@@ -35,6 +35,7 @@ export const LoginPage: React.FC = () => {
       localStorage.setItem(AUTH_TOKEN, result.data?.studentLogin?.data || '');
       store.refetchHandler?.();
       Toast.show({
+        icon: 'success',
         content: '登录成功!',
         afterClose: () => {
           navigate('/');

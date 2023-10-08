@@ -1,11 +1,13 @@
 import { useReservableSchedules } from '@/services/schedule';
 import {
-  Divider, DotLoading, Selector, Skeleton, Tabs,
+  Button,
+  Divider, DotLoading, Selector, Skeleton, Tabs, Toast,
 } from 'antd-mobile';
 import { useGetValidStudentCardsByCourse } from '@/services/student-card';
 import { useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { getWeekdayZh } from '@/types/course';
+import { useReserveSchedule } from '@/services/student-schedule';
 import styles from './reserve.module.less';
 import { StudentCard } from './card';
 
@@ -20,6 +22,7 @@ export const Reserve = ({ courseId, onClose }: IProps) => {
     loading: cardsLoading,
     validStudentCardsByCourse,
   } = useGetValidStudentCardsByCourse(courseId);
+  const { reserveSchedule, loading: reserveLoading } = useReserveSchedule();
 
   const [schedules, setSchedules] = useState<string[]>([]);
   const [cards, setCards] = useState<string[]>([]);
@@ -60,6 +63,34 @@ export const Reserve = ({ courseId, onClose }: IProps) => {
     value: card.id,
   })), [validStudentCardsByCourse]);
 
+  const onReserve = async () => {
+    if (cards.length === 0 || schedules.length === 0) {
+      Toast.show({
+        icon: 'fail',
+        content: '请选择预约时间和要使用的消费卡',
+      });
+      return;
+    }
+
+    reserveSchedule(
+      schedules[0],
+      cards[0],
+      () => {
+        Toast.show({
+          icon: 'success',
+          content: '预约成功',
+          afterClose: onClose,
+        });
+      },
+      (error) => {
+        Toast.show({
+          icon: 'fail',
+          content: error,
+        });
+      },
+    );
+  };
+
   if (loading || cardsLoading) {
     return (
       <>
@@ -91,6 +122,15 @@ export const Reserve = ({ courseId, onClose }: IProps) => {
         onChange={(v) => setCards(v)}
         options={memoCards}
       />
+      <Divider />
+      <Button
+        color="primary"
+        className={styles.reserve}
+        loading={reserveLoading}
+        onClick={onReserve}
+      >
+        立即预约
+      </Button>
     </div>
   );
 };

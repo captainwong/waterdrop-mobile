@@ -37,6 +37,7 @@ export const RegisterPage: React.FC = () => {
     });
     if (result.data?.studentRegister?.code === 200) {
       Toast.show({
+        icon: 'success',
         content: '注册成功!',
         duration: 1000,
         afterClose: () => {
