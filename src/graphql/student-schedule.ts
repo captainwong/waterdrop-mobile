@@ -8,3 +8,42 @@ mutation reserveSchedule($scheduleId: String!, $studentCardId: String!){
   }
 }
 `;
+
+export const GET_STUDENT_SCHEDULES = gql`
+  query getStudentSchedules($page: PageInput!){
+    getStudentSchedules(page: $page){
+      code
+      message
+      page{
+        page
+        pageSize
+        total
+      }
+      data{
+        id
+        status
+        createdAt
+        schedule{
+          id
+          date
+          start
+          end
+          teacher{
+            id
+            name
+          }
+        }
+        course{
+          id
+          name
+          cover
+        }
+        organization{
+          id
+          name
+          logo
+        }
+      }
+    }
+  }
+`;

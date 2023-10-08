@@ -12,7 +12,7 @@ import { ROUTES, ROUTE_CONFIG, getRouteByKey } from '@/routes/menu';
 export const useTitle = (title: string) => {
   useEffect(() => {
     document.title = title;
-  });
+  }, [title]);
 };
 
 /**
