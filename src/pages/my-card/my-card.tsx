@@ -1,15 +1,20 @@
 /* eslint-disable prettier/prettier */
 import { useStudentCards } from '@/services/student-card';
-import { Skeleton, Space, Tag } from 'antd-mobile';
+import {
+  ResultPage, Skeleton, Space, Tag,
+} from 'antd-mobile';
 import classNames from 'classnames';
 import { CardStatus } from '@/types/student-card';
 import { BankcardOutline } from 'antd-mobile-icons';
 import { CARD_TYPE } from '@/types/card';
 import dayjs from 'dayjs';
 import { DATE_FORMAT_DATE } from '@/utils/const';
+import { useGoTo } from '@/hooks';
+import { ROUTE_KEYS } from '@/routes/menu';
 import styles from './my-card.module.less';
 
 export const MyCard = () => {
+  const { go } = useGoTo();
   const { loading, studentCards } = useStudentCards();
   if (loading) {
     return (
@@ -17,6 +22,17 @@ export const MyCard = () => {
         <Skeleton.Title animated />
         <Skeleton.Paragraph lineCount={5} animated />
       </>
+    );
+  }
+
+  if (!studentCards || studentCards.length === 0) {
+    return (
+      <ResultPage
+        status="warning"
+        title="您还没有购买消费卡"
+        onPrimaryButtonClick={() => go(ROUTE_KEYS.HOME)}
+        primaryButtonText="返回首页"
+      />
     );
   }
 

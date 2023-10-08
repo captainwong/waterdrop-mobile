@@ -49,6 +49,12 @@ export const WEEKDAYS: IWeekday[] = [
   },
 ];
 
+export const getWeekdayZh = (weekday: string): string => {
+  const items = WEEKDAYS.filter((value) => value.key === weekday);
+  if (items && items.length > 0) { return items[0].label; }
+  return `unknown weekday ${weekday}`;
+};
+
 export interface ITimeSlot {
   start: string;
   end: string;
@@ -78,7 +84,7 @@ export interface ICourse {
   refund?: string;
   note?: string;
   cover: string;
-  resavableTimeSlots: ITimeSlots[];
+  reservableTimeSlots: ITimeSlots[];
 }
 
 export type TCourse = ICourse & { cardName?: string };

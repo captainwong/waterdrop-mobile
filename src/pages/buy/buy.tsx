@@ -64,13 +64,14 @@ export const Buy = () => {
   }
 
   const onBuy = async () => {
-    if (!store.wxOpenid) {
-      wxlogin();
+    // TODO 扫码登录，扫码支付
+    if (typeof WeixinJSBridge === 'undefined') {
+      Toast.show('请在微信中打开');
       return;
     }
 
-    if (typeof WeixinJSBridge === 'undefined') {
-      Toast.show('请在微信中打开');
+    if (!store.wxOpenid) {
+      wxlogin();
       return;
     }
 

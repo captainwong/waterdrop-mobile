@@ -29,7 +29,10 @@ export const MyPage = () => {
         </Grid.Item>
       </Grid>
       <List className={styles.list}>
-        <List.Item prefix={<FaceRecognitionOutline />}>
+        <List.Item
+          prefix={<FaceRecognitionOutline />}
+          onClick={() => go(ROUTE_KEYS.RESERVE_COURSE)}
+        >
           预约课程
         </List.Item>
         <List.Item prefix={<UnorderedListOutline />}>

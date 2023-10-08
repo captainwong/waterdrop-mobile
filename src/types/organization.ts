@@ -1,3 +1,4 @@
+import { ICourse } from './course';
 import { TGraphqlQuery } from './graphql';
 import { IMedia } from './media';
 
@@ -17,6 +18,7 @@ export interface IOrganization {
   frontImgs?: IMedia[];
   roomImgs?: IMedia[];
   otherImgs?: IMedia[];
+  courses?: ICourse[];
 }
 
 export type TOrganization = Partial<IOrganization>;
