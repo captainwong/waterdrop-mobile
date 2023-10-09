@@ -47,3 +47,12 @@ export const GET_STUDENT_SCHEDULES = gql`
     }
   }
 `;
+
+export const CANCEL_STUDENT_SCHEDULE = gql`
+  mutation cancelStudentSchedule($id: String!){
+    cancelStudentSchedule(id: $id){
+      code
+      message
+    }
+  }
+`;

@@ -1,4 +1,4 @@
-import { GET_STUDENT_SCHEDULES, RESERVE_SCHEDULE } from '@/graphql/student-schedule';
+import { CANCEL_STUDENT_SCHEDULE, GET_STUDENT_SCHEDULES, RESERVE_SCHEDULE } from '@/graphql/student-schedule';
 import { TGraphqlMutation } from '@/types/graphql';
 import { IStudentSchedule, TStudentSchedulesQuery } from '@/types/student-schedule';
 import { useLazyQuery, useMutation } from '@apollo/client';
@@ -79,6 +79,7 @@ export const useGetStudentSchedules = () => {
 
   useEffect(() => {
     refreshSchedules();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {
@@ -87,5 +88,30 @@ export const useGetStudentSchedules = () => {
     studentSchedules,
     refreshSchedules,
     loadMoreSchedules,
+  };
+};
+
+export const useCancelStudentSchedule = () => {
+  const [post, { loading }] = useMutation<TGraphqlMutation>(CANCEL_STUDENT_SCHEDULE);
+  const cancelStudentSchedule = async (
+    id: string,
+    onSuccess?: () => void,
+    onError?:(error:string)=>void,
+  ) => {
+    const res = await post({
+      variables: {
+        id,
+      },
+    });
+    if (res.data?.cancelStudentSchedule.code === 200) {
+      onSuccess?.();
+    } else {
+      onError?.(res.data?.cancelStudentSchedule.message || 'error');
+    }
+  };
+
+  return {
+    cancelStudentSchedule,
+    loading,
   };
 };

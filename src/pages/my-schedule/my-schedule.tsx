@@ -1,10 +1,11 @@
 /* eslint-disable prettier/prettier */
-import { useGetStudentSchedules } from '@/services/student-schedule';
+import { useCancelStudentSchedule, useGetStudentSchedules } from '@/services/student-schedule';
 import {
   Button,
   Card,
+  Divider,
   Grid,
-  Image, Skeleton, Space, Steps, Tag,
+  Image, Modal, Skeleton, Space, Steps, Tag, Toast,
 } from 'antd-mobile';
 import { Step } from 'antd-mobile/es/components/steps/step';
 import { useGoTo } from '@/hooks';
@@ -24,18 +25,29 @@ export const MySchedule = () => {
     loadMoreSchedules,
   } = useGetStudentSchedules();
 
-  const onCancelSchedule = (id: string) => {
-    console.log(id);
-  };
+  const {
+    cancelStudentSchedule,
+    loading: cancelLoading,
+  } = useCancelStudentSchedule();
 
-  if (loading) {
-    return (
-      <>
-        <Skeleton.Title animated />
-        <Skeleton.Paragraph lineCount={5} animated />
-      </>
-    );
-  }
+  const onCancelSchedule = async (id: string) => {
+    const confirm = await Modal.confirm({
+      content: '确定取消预约吗？取消后不可重复预约该课程表',
+    });
+    if (!confirm) { return; }
+    cancelStudentSchedule(id, () => {
+      Toast.show({
+        icon: 'success',
+        content: '取消预约成功',
+        afterClose: refreshSchedules,
+      });
+    }, (error) => {
+      Toast.show({
+        icon: 'fail',
+        content: error,
+      });
+    });
+  };
 
   return (
     <div className={styles.container}>
@@ -92,6 +104,7 @@ export const MySchedule = () => {
                           <Button
                             fill="none"
                             color="primary"
+                            loading={cancelLoading}
                             onClick={() => onCancelSchedule(schedule.id)}
                           >
                             取消
@@ -106,6 +119,15 @@ export const MySchedule = () => {
           ))
         }
       </Steps>
+      {
+        hasMore ? (
+          <Divider>
+            <Button fill="none" loading={loading} onClick={() => loadMoreSchedules()}>加载更多</Button>
+          </Divider>
+        ) : (
+          <Divider>没有更多了</Divider>
+        )
+      }
     </div>
   );
 };
